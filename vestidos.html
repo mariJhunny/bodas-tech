@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap"
+	 rel="stylesheet" type='text/css'>
+	<title>Bodas Tec - Vestidos</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="js/modernizr.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		// TODO: Replace with your project's customized code snippet
+		var config = {
+			apiKey: "AIzaSyDTua7F3t3NBJSQcUm_nVAYT2ViT2hFCmE",
+			authDomain: "bdbodas-6abf1.firebaseapp.com",
+			databaseURL: "https://bdbodas-6abf1.firebaseio.com",
+			projectId: "bdbodas-6abf1",
+			storageBucket: "bdbodas-6abf1.appspot.com",
+			messagingSenderId: "357037616157",
+		};
+		firebase.initializeApp(config);
+		var uid;
+		function logout() {
+			firebase.auth().signOut().then(function () {
+				alert("cerro session");
+				window.location = "index.html";
+			}, function (error) {
+				// An error happened.
+			});
+		}
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				// User is signed in.
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var uid = user.uid;
+				var providerData = user.providerData;
+				console.log(email);
+				console.log(uid);
+				showMenus();
+			} else {
+				showLogued();
+			}
+		});
+	</script>
+	<!--======================================== Boton ir arriba ========================================-->
+	<i class="btn-up fa fa-arrow-circle-o-up hidden-xs"></i>
+	<!--======================================== Navegación ========================================-->
+	<header class="full-reset header">
+		<!--======================================== Logo(Nombre INS) ========================================-->
+		<div class="full-reset logo">
+			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO">
+				<a href="index.html" style="color: #fff; text-decoration: none;">Vestidos</a>
+			</span>
+			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO">
+				<a href="index.html" style="color: #fff; text-decoration: none;">Vestidos</a>
+			</span>
+		</div>
+		<!--======================================== Links de navegación ========================================-->
+		<nav class="full-reset navigation">
+			<ul class="full-reset list-unstyled">
+				<li>
+					<a href="index.html">Inicio</a>
+				</li>
+				<li id="liOrganizer">
+					<a href="organizador.html">Organizador</a>
+				</li>
+				<li>
+					<a href="provedores.html">Proveedores</a>
+				</li>
+				<li id="liLogout">
+					<a onclick="logout()">Cerrar sesión</a>
+				</li>
+				<li id="liSignup">
+					<a href="registro.html">Registro</a>
+				</li>
+				<li id="liSignin">
+					<a href="login.html">Accede</a>
+				</li>
+				<li>
+					<a href="#" class="btm-mega-menu">Más &nbsp;
+						<i class="fa fa-caret-down"></i>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<!--======================================== Mega menu ========================================-->
+		<div class="full-reset mega-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Recursos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-search"></i>&nbsp; Buscar en GOOGLE
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-graduation-cap"></i>&nbsp; Plataforma (MOODLE)
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Enlaces importantes</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-university"></i>&nbsp; MINED</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-flask"></i>&nbsp; UNIVERSIDADES
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Archivos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!">
+									<i class="fa fa-star-o"></i>&nbsp; Promociones INS</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-file-text-o"></i>&nbsp; Const. de conducta
+								</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-download"></i>&nbsp; Descargas</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
+		</div>
+		<!--======================================== Mega menu "organizador"========================================-->
+		<div class="full-reset mega-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Recursos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-search"></i>&nbsp; Buscar en GOOGLE
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-graduation-cap"></i>&nbsp; Plataforma (MOODLE)
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Enlaces importantes</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-university"></i>&nbsp; MINED</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-flask"></i>&nbsp; UNIVERSIDADES
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Archivos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!">
+									<i class="fa fa-star-o"></i>&nbsp; Promociones INS</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-file-text-o"></i>&nbsp; Const. de conducta
+								</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-download"></i>&nbsp; Descargas</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
+		</div>
+		<!--======================================== Boton menu mobil ========================================-->
+		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m">
+			<i class="fa fa-ellipsis-v"></i>
+		</a>
+
+	</header>
+	<!--======================================== Logo & Lema ========================================-->
+	<section class="full-reset font-cover" style="background-image: url(assets/img/imagen3.jpg);">
+		<div class="full-reset" style="height: 100%; background-color: rgba(255,255,255,.6); padding: 60px 0;">
+
+
+			<h1 class="text-center" class="hidden-xs hidden-sm" style="font-family:'Romanesco'; color: #4a4c4d; height: 800;">
+				VESTIDOS
+			</h1>
+		</div>
+	</section>
+	<div class="divider-general"></div>
+	<section class="col-xs-12 col-sm-8 col-md-12 info-section-ins">
+		<!--========================================  ========================================-->
+		<section class="full-reset" style="background-color: #fff; padding: 20px 0;">
+			<div class="container">
+				<div class="row">
+					<!--======================================== TEXTO========================================-->
+					<article class="full-reset">
+						<div class="page-header" id="vestido-ins">
+							<h1>Modelos de vestidos de novia</h1>
+						</div>
+						<p class="lead text-justify">
+							Te presentaremos distintos tipos de vestidos de novia, ya que elegir el modelo más adecuado a veces no resulta muy sencillo.
+							En la actualidad existen muchas variedades de estilos, telas y colores para ser el centro de atención el día de tu
+							boda.</p>
+						<figure>
+							<img src="assets/gallery/vestido1.jpg" class="img-responsive img-rounded center-box" width="500">
+						</figure>
+						<br>
+						<br>
+						<p class="lead text-justify">Los criterios que primero debemos tener en cuenta para elegir el diseño más adecuado son el gusto personal y la comodidad.
+							A continuación te presentamos los distintos aspectos a considerar en el momento de elegir tu vestido de novia.</p>
+						<br>
+						<h3>
+							<strong>Princesa</strong>
+						</h3>
+						<p class="lead text-justify">Este estilo de vestido lo recomendamos para las románticas, imaginativas y soñadoras. La falda de este diseño comienza
+							en la cintura y se caracteriza por tener la tela fruncida o en tablas.</p>
+						<figure>
+							<img src="assets/gallery/prin1.jpg" class="img-responsive img-rounded center-box" width="500">
+						</figure>
+						<br>
+						<figure>
+							<img src="assets/gallery/prin2.jpg" class="img-responsive img-rounded center-box" width="500">
+						</figure>
+						<br>
+						<h3>
+							<strong>Imperial</strong>
+						</h3>
+						<p class="lead text-justify">Es un vestido que se caracteriza por presentar una falda que comienza después de la sisa. Perfecto para novias sofisticadas,
+							simples y majestuosas.</p>
+						<figure>
+							<img src="assets/gallery/imp1.jpg" class="img-responsive img-rounded center-box" width="500">
+						</figure>
+						<br>
+						<figure>
+							<img src="assets/gallery/imp2.jpg" class="img-responsive img-rounded center-box" width="500">
+						</figure>
+						<br>
+						<h3>
+							<strong>Cintura caída</strong>
+						</h3>
+						<p class="lead text-justify">Este modelo va por debajo de la cintura, llegando hasta la cadera. El volumen de la falda comienza a partir de la cadera,
+							donde se ajusta. Hace ver los cuerpos muy bonitos, pero si eres de las que tienen mucha cadera definitivamente no
+							son los que recomendamos..</p>
+						<figure>
+							<img src="assets/gallery/cin1.jpg" class="img-responsive img-rounded center-box" width="500">
+						</figure>
+						<br>
+						<h3>
+							<strong>Cintura vasca</strong>
+						</h3>
+						<p class="lead text-justify">Este diseño comienza debajo de la cintura y en el centro del vestido forma una V.</p>
+						<figure>
+							<img src="assets/gallery/cin2.jpg" class="img-responsive img-rounded center-box" width="500">
+						</figure>
+						<br>
+						<h3>
+							<strong>Cola barrido</strong>
+						</h3>
+						<p class="lead text-justify">Es la cola de novia de menor longitud, apenas toca el suelo y sólo es unos pocos centímetros más larga que el vestido.
+							Ideal para un vestido discreto y simple.</p>
+						<figure>
+							<img src="assets/gallery/cola1.jpg" class="img-responsive img-rounded center-box" width="400">
+						</figure>
+					</article>
+				</div>
+			</div>
+		</section>
+	</section>
+	<!--======================================== Proveedores ========================================-->
+	<div class="divider-general"></div>
+	<!--========================================  ========================================-->
+			<h2 class="text-center" style="font-family:'Romanesco';"><strong>Algunos de nuestros proveedores en Vestidos</strong></h2>
+		<div class="divider-general"></div>
+		
+		<!--======================================== Proveedores ========================================-->
+	<section class="events-ins">
+		<div class="container-fluid">
+			<div class="row">
+				<!--======================================== vestidos 1 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/novia.jpg" alt="default" class="img-responsive img-rounded" width="315">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>ROSA CLARA</strong></h3>
+				        <p class="text-justify"><small>La colección de alta costura de trajes de novia presenta diseños repletos de detalles exquisitos en tejidos delicados y fluidos para vestir los sueños de la novia de hoy de romanticismo y elegancia.</small></p>
+				        <p class="text-center"><a href="https://www.rosaclara.es/c/vestidos-de-novia/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 2 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/novia2.jpg" alt="default" class="img-responsive img-rounded" width="265">
+				      <div class="caption"
+				      <p></p>
+				        <h3 class="text-center"><strong>WHITE ONE</strong></h3>
+				        <p class="text-justify"><small>White One es una colección que lleva las tendencias en vestidos de novia en todo el mundo, consiguiendo así que todas las novias, sin importar nacionalidad o religión, sean capaces de encontrar en esta colección su vestido ideal. </small></p>
+				        <p class="text-center"><a href="https://www.whiteonebridal.com/es/vestidos-novia/whiteone/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 3 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/novia3.jpg" alt="IMG" class="img-responsive img-rounded" width="300">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>LUNA NOVIAS</strong></h3>
+				        <p class="text-justify"><small>Vestidos románticos y suaves para las novias de hoy, confeccionados con una amplia variedad de tejidos, cuidando hasta el último detalle; para que las novias luzcan radiantes en uno de los días más mágicos de su vida.</small></p>
+				        <p class="text-center"><a href="https://www.lunanovias.com/language-selector/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+			</div>
+		</div>
+	</section>
+	<div class="divider-general"></div>
+	<!--======================================== PIE DE PAGINA ========================================-->
+	<footer class="full-reset footer">
+		<div class="full-reset" style="padding: 15px 0;">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Visitenos en</h4>
+						<p class="text-center">www.informatica.edu.bo/</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Contactenos</h4>
+						<p class="text-center">Teléfono: 77277352
+							<br>69707104
+							<br> Correo Electrónico: marimu9188@gmail.com
+							<br>fernkat5@gmail.com</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles subtitles-footer">Siguenos en</h4>
+						<ul class="list-unstyled links-footer">
+							<li>
+								<a href="https://www.facebook.com/" class="open-link-newTab">
+									<i class="fa fa-facebook"></i> &nbsp; Facebook
+								</a>
+							</li>
+							<li>
+								<a href="https://twitter.com/login?lang=es" class="open-link-newTab">
+									<i class="fa fa-twitter"></i> &nbsp; Twitter
+								</a>
+							</li>
+							<li>
+								<a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab">
+									<i class="fa fa-google-plus"></i> &nbsp; Google+
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12">
+						<div class="full-reset footer-copyright">
+							<i class="fa fa-copyright"></i> 2019 BODAS TEC</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!--======================================== Proveedores ========================================-->
+	<script>
+		function showMenus() {
+			document.getElementById("liSignup").style.display = "none";
+			document.getElementById("liSignin").style.display = "none";
+
+		}
+		function showLogued() {
+			document.getElementById("liOrganizer").style.display = "none";
+			document.getElementById("liLogout").style.display = "none";
+		}
+	</script>
+</body>
+
+</html>

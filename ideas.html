@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap"
+	 rel="stylesheet" type='text/css'>
+	<title>BodasTec - Ideas</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="js/modernizr.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+
+<body>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		// TODO: Replace with your project's customized code snippet
+		var config = {
+			apiKey: "AIzaSyDTua7F3t3NBJSQcUm_nVAYT2ViT2hFCmE",
+			authDomain: "bdbodas-6abf1.firebaseapp.com",
+			databaseURL: "https://bdbodas-6abf1.firebaseio.com",
+			projectId: "bdbodas-6abf1",
+			storageBucket: "bdbodas-6abf1.appspot.com",
+			messagingSenderId: "357037616157",
+		};
+		firebase.initializeApp(config);
+		var db = firebase.firestore();
+		function logout() {
+			firebase.auth().signOut().then(function () {
+				alert("cerro session");
+				window.location = "index.html";
+			}, function (error) {
+				// An error happened.
+			});
+		}
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				// User is signed in.
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var uid = user.uid;
+				var providerData = user.providerData;
+				console.log(email);
+				showMenus();
+				// ...
+			} else {
+				// User is signed out.
+				showLogued();
+			}
+		});
+	</script>
+	<!--======================================== Boton ir arriba ========================================-->
+	<i class="btn-up fa fa-arrow-circle-o-up hidden-xs"></i>
+	<!--======================================== Navegación ========================================-->
+	<header class="full-reset header">
+		<!--======================================== Logo(Nombre INS) ========================================-->
+		<div class="full-reset logo">
+			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO">
+				<a href="index.html" style="color: #fff; text-decoration: none;">Ideas</a>
+			</span>
+			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO">
+				<a href="index.html" style="color: #fff; text-decoration: none;">Ideas</a>
+			</span>
+		</div>
+		<!--======================================== Links de navegación ========================================-->
+		<nav class="full-reset navigation">
+			<ul class="full-reset list-unstyled">
+				<li>
+					<a href="index.html">Inicio</a>
+				</li>
+				<li id="liOrganizer">
+					<a href="organizador.html">Organizador</a>
+				</li>
+				<li>
+					<a href="provedores.html">Proveedores</a>
+				</li>
+				<li id="liLogout">
+					<a onclick="logout()">Cerrar sesión</a>
+				</li>
+				<li id="liSignup">
+					<a href="registro.html">Registro</a>
+				</li>
+				<li id="liSignin">
+					<a href="login.html">Accede</a>
+				</li>
+				<li>
+					<a href="#" class="btm-mega-menu">Más &nbsp;
+						<i class="fa fa-caret-down"></i>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<!--======================================== Mega menu ========================================-->
+		<div class="full-reset mega-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Recursos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-search"></i>&nbsp; Buscar en GOOGLE
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-graduation-cap"></i>&nbsp; Plataforma (MOODLE)</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Enlaces importantes</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-university"></i>&nbsp; MINED</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-flask"></i>&nbsp; UNIVERSIDADES
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Archivos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!">
+									<i class="fa fa-star-o"></i>&nbsp; Promociones INS</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-file-text-o"></i>&nbsp; Const. de conducta
+								</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-download"></i>&nbsp; Descargas</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
+		</div>
+
+		<!--======================================== Boton menu mobil ========================================-->
+		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m">
+			<i class="fa fa-ellipsis-v"></i>
+		</a>
+
+	</header>
+	<!--======================================== carrusel========================================-->
+	<section class="full-reset" style="background-color: rgb(241, 226, 238); padding: 40px 0;" name="servi" id="servi">
+		<div class="container">
+			<!--======================================== Carrusel1 ========================================-->
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-sm-push-6">
+					<h1 class="text-center titles" style="font-family:'Overlock'">VESTIDOS</h1>
+					<p class="lead" style="font-family:'Overlock'" align="justify">
+						Ya que elegir el modelo adecuado a veces no resulta muy sencillo, acontinuacion te presentamos distintos tipos de vestidos de novia. En la actualidad existen muchas variedades de estilos, telas y colores para ser el centro de atención el día de tu boda te recomendamos los siguientes:
+						<a href="vestidos.html" class="open-link-newTab">Has click aqui para ver</a>
+					</p>
+					<i class=""></i>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-sm-pull-6">
+					<div id="slider-ins" class="carousel slide" data-ride="carousel">
+						<!-- Indicadores -->
+						<ol class="carousel-indicators">
+							<li data-target="#slider-ins" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-ins" data-slide-to="1"></li>
+							<li data-target="#slider-ins" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Imagenes -->
+						<div class="carousel-inner" role="listbox">
+
+							<!-- Primera imagen -->
+							<div class="item active">
+								<img src="assets/gallery/ves1.jpg" alt="Default">
+								<div class="carousel-caption">
+								</div>
+							</div>
+
+							<!-- Segunda imagen -->
+							<div class="item">
+								<img src="assets/gallery/ves2.jpg" alt="Default" width="538">
+								<div class="carousel-caption">
+								</div>
+							</div>
+
+							<!-- Tercera imagen -->
+							<div class="item">
+								<img src="assets/gallery/ves3.jpg" alt="Default">
+								<div class="carousel-caption">
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Controles
+						<a class="left carousel-control" href="#slider-ins" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#slider-ins" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a> -->
+					</div>
+				</div>
+			</div>
+			<br>
+			<div class="divider-general"></div>
+			<br>
+			<!--======================================== carrusel2 ========================================-->
+
+			<div class="row">
+				<div class="col-xs-12 col-sm-6">
+					<h1 class="text-center titles" style="font-family:'Overlock'">PASTELES</h1>
+					<p class="lead" style="font-family:'Overlock'" align="justify">
+						Los pasteles de boda o tortas para matrimonio, son uno de los grandes símbolos del matrimonio por tradición, y como si esto fuera poco, una de las fotos obligadas de una boda es el pastel acompañado de los novios. Por esta razón, no es sólo para comer, sino también un elemento muy importante.
+						<a href="pasteles.html" class="open-link-newTab">Has click aqui para ver</a>
+					</p>
+				</div>
+				<div class="col-xs-12 col-sm-6">
+					<div id="slider-ins" class="carousel slide" data-ride="carousel">
+						<!-- Indicadores -->
+						<ol class="carousel-indicators">
+							<li data-target="#slider-ins" data-slide-to="0" class="active"></li>
+							<li data-target="#slider-ins" data-slide-to="1"></li>
+							<li data-target="#slider-ins" data-slide-to="2"></li>
+						</ol>
+
+						<!-- Imagenes -->
+						<div class="carousel-inner" role="listbox">
+
+							<!-- Primera imagen -->
+							<div class="item active">
+								<img src="assets/gallery/pas1.jpg" alt="Default">
+								<div class="carousel-caption">
+							
+								</div>
+							</div>
+
+							<!-- Segunda imagen -->
+							<div class="item">
+								<img src="assets/gallery/pas2.jpg" alt="Default" width="500">
+								<div class="carousel-caption">
+								
+								</div>
+							</div>
+
+							<!-- Tercera imagen -->
+							<div class="item">
+								<img src="assets/gallery/ser4.jpg" alt="Default" width="500">
+								<div class="carousel-caption">
+								
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Controles
+						<a class="left carousel-control" href="#slider-ins" role="button" data-slide="prev">
+							<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+							<span class="sr-only">Previous</span>
+						</a>
+						<a class="right carousel-control" href="#slider-ins" role="button" data-slide="next">
+							<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+							<span class="sr-only">Next</span>
+						</a> -->
+					</div>
+				</div>
+			</div>
+			<br>
+						<div class="divider-general"></div>
+						<br>
+					<!--======================================== Carrusel3 ========================================-->
+					<div class="row">
+							<div class="col-xs-12 col-sm-6 col-sm-push-6">
+								<h1 class="text-center titles" style="font-family:'Overlock'">BOUQUETS</h1>
+								<p class="lead" style="font-family:'Overlock'" align="justify">
+										El ramo es el complemento perfecto para una novia. Hay que elegirlo teniendo en cuenta el vestido, los accesorios y la decoración de la boda. Puedes ir por un ramo tradicional o más original o incluso darle un toque personal. Aquí encontrarás imágenes e ideas para decorar y personalizar ramos de novia, para que te inspires y puedas encontrar el ramo perfecto para ti:
+									<a href="flores.html" class="open-link-newTab">Has click aqui para ver</a>
+								</p>
+								<i class=""></i>
+							</div>
+							<div class="col-xs-12 col-sm-6 col-sm-pull-6">
+								<div id="slider-ins" class="carousel slide" data-ride="carousel">
+									<!-- Indicadores -->
+									<ol class="carousel-indicators">
+										<li data-target="#slider-ins" data-slide-to="0" class="active"></li>
+										<li data-target="#slider-ins" data-slide-to="1"></li>
+										<li data-target="#slider-ins" data-slide-to="2"></li>
+									</ol>
+			
+									<!-- Imagenes -->
+									<div class="carousel-inner" role="listbox">
+			
+										<!-- Primera imagen -->
+										<div class="item active">
+											<img src="assets/gallery/ram1.jpg" alt="Default">
+											<div class="carousel-caption">
+											</div>
+										</div>
+			
+										<!-- Segunda imagen -->
+										<div class="item">
+											<img src="assets/gallery/ram2.jpg" alt="Default">
+											<div class="carousel-caption">
+											</div>
+										</div>
+			
+										<!-- Tercera imagen -->
+										<div class="item">
+											<img src="assets/gallery/ram3.jpg" alt="Default">
+											<div class="carousel-caption">
+											</div>
+										</div>
+			
+									</div>
+			
+									<!-- Controles
+									<a class="left carousel-control" href="#slider-ins" role="button" data-slide="prev">
+										<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="right carousel-control" href="#slider-ins" role="button" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a> -->
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="divider-general"></div>
+						<br>
+						<!--======================================== carrusel4 ========================================-->
+			
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+								<h1 class="text-center titles" style="font-family:'Overlock'">PEINADOS</h1>
+								<p class="lead" style="font-family:'Overlock'" align="justify">
+										Amiga, agárrate porque hemos recopilado los peinados de novia más bonitos de esta temporada. Y son tan bonitos que no podrás dejar de mirarlos. 
+									<a href="peinados.html" class="open-link-newTab">Has click aqui para ver</a>
+								</p>
+							</div>
+							<div class="col-xs-12 col-sm-6">
+								<div id="slider-ins" class="carousel slide" data-ride="carousel">
+									<!-- Indicadores -->
+									<ol class="carousel-indicators">
+										<li data-target="#slider-ins" data-slide-to="0" class="active"></li>
+										<li data-target="#slider-ins" data-slide-to="1"></li>
+										<li data-target="#slider-ins" data-slide-to="2"></li>
+									</ol>
+			
+									<!-- Imagenes -->
+									<div class="carousel-inner" role="listbox">
+			
+										<!-- Primera imagen -->
+										<div class="item active">
+											<img src="assets/gallery/pe1.jpg" alt="Default">
+											<div class="carousel-caption">
+										
+											</div>
+										</div>
+			
+										<!-- Segunda imagen -->
+										<div class="item">
+											<img src="assets/gallery/pe2.jpg" alt="Default">
+											<div class="carousel-caption">
+											
+											</div>
+										</div>
+			
+										<!-- Tercera imagen -->
+										<div class="item">
+											<img src="assets/gallery/pe3.jpg" alt="Default">
+											<div class="carousel-caption">
+											
+											</div>
+										</div>
+			
+									</div>
+			
+									<!-- Controles
+									<a class="left carousel-control" href="#slider-ins" role="button" data-slide="prev">
+										<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+										<span class="sr-only">Previous</span>
+									</a>
+									<a class="right carousel-control" href="#slider-ins" role="button" data-slide="next">
+										<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+										<span class="sr-only">Next</span>
+									</a> -->
+								</div>
+							</div>
+						</div>
+					</div>
+		</div>
+		
+		</div>
+	</section>
+	<!--======================================== Pie de pagina ========================================-->
+	<footer class="full-reset footer">
+		<div class="full-reset" style="padding: 15px 0;">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Visitenos en</h4>
+						<p class="text-center">www.informatica.edu.bo/</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Contactenos</h4>
+						<p class="text-center">Teléfono: 77277352
+							<br>69707104
+							<br> Correo Electrónico: marimu9188@gmail.com
+							<br>fernkat5@gmail.com</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles subtitles-footer">Siguenos en</h4>
+						<ul class="list-unstyled links-footer">
+							<li>
+								<a href="https://www.facebook.com/" class="open-link-newTab">
+									<i class="fa fa-facebook"></i> &nbsp; Facebook
+								</a>
+							</li>
+							<li>
+								<a href="https://twitter.com/login?lang=es" class="open-link-newTab">
+									<i class="fa fa-twitter"></i> &nbsp; Twitter
+								</a>
+							</li>
+							<li>
+								<a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab">
+									<i class="fa fa-google-plus"></i> &nbsp; Google+
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12">
+						<div class="full-reset footer-copyright">
+							<i class="fa fa-copyright"></i> 2019 BODAS TEC</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script>
+		function showMenus() {
+			document.getElementById("liSignup").style.display = "none";
+			document.getElementById("liSignin").style.display = "none";
+
+		}
+		function showLogued() {
+			document.getElementById("liOrganizer").style.display = "none";
+			document.getElementById("liLogout").style.display = "none";
+		}
+	</script>
+</body>
+
+</html>

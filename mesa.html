@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap"
+	 rel="stylesheet" type='text/css'>
+	<title>BodasTec - Mesas</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="js/modernizr.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+	<script>
+		// Initialize Firebase
+		// TODO: Replace with your project's customized code snippet
+		var config = {
+			apiKey: "AIzaSyDTua7F3t3NBJSQcUm_nVAYT2ViT2hFCmE",
+			authDomain: "bdbodas-6abf1.firebaseapp.com",
+			databaseURL: "https://bdbodas-6abf1.firebaseio.com",
+			projectId: "bdbodas-6abf1",
+			storageBucket: "bdbodas-6abf1.appspot.com",
+			messagingSenderId: "357037616157",
+		};
+		firebase.initializeApp(config);
+		var uid;
+		var docEvento;
+		var db = firebase.firestore();
+		function logout() {
+			firebase.auth().signOut().then(function () {
+				alert("Cerro session");
+				window.location = "index.html";
+			}, function (error) {
+				// An error happened.
+			});
+		}
+
+		update();
+
+		function update() {
+			firebase.auth().onAuthStateChanged(function (user) {
+				if (user) {
+					// User is signed in.
+					var displayName = user.displayName;
+					var email = user.email;
+					var emailVerified = user.emailVerified;
+					var photoURL = user.photoURL;
+					var isAnonymous = user.isAnonymous;
+					uid = user.uid;
+					var providerData = user.providerData;
+					console.log(email);
+					showMenus();
+					var invitado = document.getElementById("invi");
+					var data = '<ul class="list-group" style="width: 290px">';
+					db.collection("evento").where("uid2", "==", uid).get().then(function (querySnapshot1) {
+						querySnapshot1.forEach(function (doc1) {
+							// doc.data() is never undefined for query doc snapshots
+							docEvento = doc1.id;
+							db.collection("invitado").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
+								querySnapshot2.forEach(function (doc2) {
+									// doc.data() is never undefined for query doc snapshots
+									docEvento = doc2.id;
+									console.log("gunar1");
+									var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
+									var click = "statusGuest('" + doc2.id + "', '" + doc2.data().asiste + "')"
+									data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
+
+									console.log(doc2.id, " => ", doc2.data());
+								}
+								);
+								data += "</ul>"
+								invitado.innerHTML = data;
+							})
+								.catch(function (error) {
+									console.log("Error getting documents: ", error);
+								});
+							;
+							console.log(doc.id, " => ", doc.data());
+						});
+					})
+						.catch(function (error) {
+							console.log("Error getting documents: ", error);
+						});
+					;
+					db.collection("evento").where("uid1", "==", uid).get().then(function (querySnapshot) {
+						querySnapshot.forEach(function (doc) {
+							// doc.data() is never undefined for query doc snapshots
+							docEvento = doc.id;
+							db.collection("invitado").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
+								querySnapshot2.forEach(function (doc2) {
+									console.log("gunar2");
+									// doc.data() is never undefined for query doc snapshots
+									var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
+									var click = "statusGuest('" + doc2.id + "', '" + doc2.data().asiste + "')"
+									data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
+									console.log(doc2.id, " => ", doc2.data());
+								});
+								data += "</ul>"
+								console.log(data);
+								invitado.innerHTML = data;
+							})
+								.catch(function (error) {
+									console.log("Error getting documents: ", error);
+								});
+							;
+							console.log(doc.id, " => ", doc.data());
+						});
+					})
+						.catch(function (error) {
+							console.log("Error getting documents: ", error);
+						});
+					;
+					console.log(docEvento);
+					// ...
+				} else {
+					showLogued();
+				}
+			});
+		}
+
+	</script>
+	<!--======================================== Boton ir arriba ========================================-->
+	<i class="btn-up fa fa-arrow-circle-o-up hidden-xs"></i>
+	<!--======================================== Navegación ========================================-->
+	<header class="full-reset header">
+		<!--======================================== Logo(Nombre INS) ========================================-->
+		<div class="full-reset logo">
+			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO">
+				<a href="index.html" style="color: #fff; text-decoration: none;">Mesas</a>
+			</span>
+			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO">
+				<a href="index.html" style="color: #fff; text-decoration: none;">Mesas</a>
+			</span>
+		</div>
+		<!--======================================== Links de navegación ========================================-->
+		<nav class="full-reset navigation">
+			<ul class="full-reset list-unstyled">
+				<li>
+					<a href="index.html">Inicio</a>
+				</li>
+				<li id="liOrganizer">
+					<a href="organizador.html">Organizador</a>
+				</li>
+				<li>
+					<a href="provedores.html">Proveedores</a>
+				</li>
+				<li id="liLogout">
+					<a onclick="logout()">Cerrar sesión</a>
+				</li>
+				<li id="liSignup">
+					<a href="registro.html">Registro</a>
+				</li>
+				<li id="liSignin">
+					<a href="login.html">Accede</a>
+				</li>
+				<li>
+					<a href="#" class="btm-mega-menu">Más &nbsp;
+						<i class="fa fa-caret-down"></i>
+					</a>
+				</li>
+			</ul>
+		</nav>
+		<!--======================================== Mega menu ========================================-->
+		<div class="full-reset mega-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Recursos educativos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-search"></i>&nbsp; Buscar en GOOGLE
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-graduation-cap"></i>&nbsp; Plataforma (MOODLE)
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Enlaces importantes</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-university"></i>&nbsp; MINED</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-flask"></i>&nbsp; UNIVERSIDADES
+								</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Archivos</span>
+						<ul class="list-unstyled full-reset">
+							<li>
+								<a href="#!">
+									<i class="fa fa-star-o"></i>&nbsp; Promociones INS</a>
+							</li>
+							<li>
+								<a href="#!" class="open-link-newTab">
+									<i class="fa fa-file-text-o"></i>&nbsp; Const. de conducta
+								</a>
+							</li>
+							<li>
+								<a href="#!">
+									<i class="fa fa-download"></i>&nbsp; Descargas</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
+		</div>
+		<!--======================================== Boton menu mobil ========================================-->
+		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m">
+			<i class="fa fa-ellipsis-v"></i>
+		</a>
+	</header>
+	<!--======================================== Logo & Lema ========================================-->
+	<section class="full-reset font-cover" style="background-image: url(assets/img/imagen7.jpg);">
+		<div class="full-reset" style="height: 100%; background-color: rgba(255,255,255,.8); padding: 10px 0;">
+			<h1 class="text-center titles" style="font-family:'Great Vibes'; color: rgb(37, 37, 37);">
+				<b>- - - - - - - - - - - - - - - -</b>
+			</h1>
+			<h1 class="text-center titles" style="font-family:'Courgette'; color: rgb(37, 37, 37);">Organizador de Mesas</h1>
+			<h1 class="text-center titles" style="font-family:'Great Vibes'; color: rgb(37, 37, 37);">
+				<b>- - - - - - - - - - - - - - - -</b>
+			</h1>
+					<h2 class="text-center" style="font-family:'Romanesco';">"La familia, los amigos, los colegas del trabajo... Agrúpados y te será más fácil la organizacion."</h2>
+		</div>
+	</section>
+	<!--======================================== contenido de la pagina ========================================-->
+	<section class="text-left" style="font-family:'Romanesco'; background: rgb(250, 225, 240,.3); padding: 1px 0;"><h1>&nbsp;&nbsp;&nbsp;Los invitados de tu lista aparecerán en el Organizador de Mesas de manera automatica . . .</h1></section>
+	<div class="divider-general"></div>
+	<!--======================================== PADRES DE LOS NOVIOS ========================================-->
+	<section class="full-reset" style="background: rgb(249, 252, 227)">
+		<div class="container">
+			<div class="row">
+				<article class="col-sm-8" id="b-contador">
+					<div class="page-header" style="margin-bottom:40px;">
+						<h2>
+							<i class="fa fa-coffee"></i> &nbsp; Padres de los Novios</h2>
+					</div>
+					<div id="invi"></div>
+					<script language="javascript">
+						function statusGuest(id, status) {
+							db.collection("invitado").doc(id).set({
+								asiste: status == "Si" ? 'No' : 'Si'
+							}, { merge: true }).then(function (obj) {
+								update();
+							})
+						}
+					</script>
+				</article>
+	</section>
+	<!--======================================== Familiar ========================================-->
+	<section class="full-reset" style="background-color: #fff; padding: 20px 0;">
+		<div class="container">
+			<div class="row">
+				<article class="col-sm-8" id="b-contador">
+					<div class="page-header" style="margin-bottom:40px;">
+						<h2>
+							<i class="fa fa-coffee"></i> &nbsp; Familiar</h2>
+					</div>
+					<div id="invi"></div>
+					<script language="javascript">
+						function statusGuest(id, status) {
+							db.collection("invitado").doc(id).set({
+								asiste: status == "Si" ? 'No' : 'Si'
+							}, { merge: true }).then(function (obj) {
+								update();
+							})
+						}
+					</script>
+				</article>
+	</section>
+	<!--======================================== Colegas de Trabajo ========================================-->
+	<section class="full-reset" style="background-color: #fff; padding: 20px 0;">
+		<div class="container">
+			<div class="row">
+				<article class="col-sm-8" id="b-contador">
+					<div class="page-header" style="margin-bottom:40px;">
+						<h2>
+							<i class="fa fa-coffee"></i> &nbsp; Colegas de Trabajo</h2>
+					</div>
+					<div id="invi"></div>
+					<script language="javascript">
+						function statusGuest(id, status) {
+							db.collection("invitado").doc(id).set({
+								asiste: status == "Si" ? 'No' : 'Si'
+							}, { merge: true }).then(function (obj) {
+								update();
+							})
+						}
+					</script>
+				</article>
+	</section>
+	<!--======================================== Amigos e Invitados ========================================-->
+	<section class="full-reset" style="background-color: #fff; padding: 20px 0;">
+		<div class="container">
+			<div class="row">
+				<article class="col-sm-8" id="b-contador">
+					<div class="page-header" style="margin-bottom:40px;">
+						<h2>
+							<i class="fa fa-coffee"></i> &nbsp; Amigos e Invitados</h2>
+					</div>
+					<div id="invi"></div>
+					<script language="javascript">
+						function statusGuest(id, status) {
+							db.collection("invitado").doc(id).set({
+								asiste: status == "Si" ? 'No' : 'Si'
+							}, { merge: true }).then(function (obj) {
+								update();
+							})
+						}
+					</script>
+				</article>
+	</section>
+	<!--======================================== Pie de pagina ========================================-->
+	<footer class="full-reset footer">
+		<div class="full-reset" style="padding: 15px 0;">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Visitenos en</h4>
+						<p class="text-center">www.informatica.edu.bo/</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Contactenos</h4>
+						<p class="text-center">Teléfono: 77277352
+							<br>69707104
+							<br> Correo Electrónico: marimu9188@gmail.com
+							<br>fernkat5@gmail.com</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles subtitles-footer">Siguenos en</h4>
+						<ul class="list-unstyled links-footer">
+							<li>
+								<a href="https://www.facebook.com/" class="open-link-newTab">
+									<i class="fa fa-facebook"></i> &nbsp; Facebook
+								</a>
+							</li>
+							<li>
+								<a href="https://twitter.com/login?lang=es" class="open-link-newTab">
+									<i class="fa fa-twitter"></i> &nbsp; Twitter
+								</a>
+							</li>
+							<li>
+								<a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab">
+									<i class="fa fa-google-plus"></i> &nbsp; Google+
+								</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12">
+						<div class="full-reset footer-copyright">
+							<i class="fa fa-copyright"></i> 2019 BODAS TEC</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script>
+		function showMenus() {
+			document.getElementById("liSignup").style.display = "none";
+			document.getElementById("liSignin").style.display = "none";
+
+		}
+		function showLogued() {
+			document.getElementById("liOrganizer").style.display = "none";
+			document.getElementById("liLogout").style.display = "none";
+		}
+	</script>
+</body>
+
+</html>

@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap" rel="stylesheet" type='text/css'>
+	<title>Wedding Planning</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="js/modernizr.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+
+<body>
+		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		// TODO: Replace with your project's customized code snippet
+		var config = {
+			apiKey: "AIzaSyDTua7F3t3NBJSQcUm_nVAYT2ViT2hFCmE",
+			authDomain: "bdbodas-6abf1.firebaseapp.com",
+			databaseURL: "https://bdbodas-6abf1.firebaseio.com",
+			projectId: "bdbodas-6abf1",
+			storageBucket: "bdbodas-6abf1.appspot.com",
+			messagingSenderId: "357037616157",
+		};
+		firebase.initializeApp(config);
+ 		 var db = firebase.firestore();
+	  	function logout() {
+			firebase.auth().signOut().then(function () {
+				alert("cerro session");
+				window.location="index.html";
+			}, function (error) {
+				// An error happened.
+			});
+		}
+	  firebase.auth().onAuthStateChanged(function (user) {
+		if (user) {
+		  // User is signed in.
+		  var displayName = user.displayName;
+		  var email = user.email;
+		  var emailVerified = user.emailVerified;
+		  var photoURL = user.photoURL;
+		  var isAnonymous = user.isAnonymous;
+		  var uid = user.uid;
+		  var providerData = user.providerData;
+		  console.log(email);
+		  showMenus();
+		  // ...
+		} else {
+		  // User is signed out.
+		  showLogued();
+		}
+	  });
+	</script>
+	<!--======================================== Boton ir arriba ========================================-->
+	<i class="btn-up fa fa-arrow-circle-o-up hidden-xs"></i>
+	<!--======================================== Navegación ========================================-->
+	<header class="full-reset header">
+		<!--======================================== Logo(Nombre INS) ========================================-->
+		<div class="full-reset logo">
+			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Organizador</a></span>
+			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Organizador</a></span>
+		</div>
+		<!--======================================== Links de navegación ========================================-->
+		<nav class="full-reset navigation">
+				<ul class="full-reset list-unstyled">
+				  <li><a href="index.html">Inicio</a></li>
+				  <li id="liOrganizer"><a href="organizador.html">Organizador</a></li>
+				  <li><a href="provedores.html">Proveedores</a></li>
+				  <li id="liLogout"><a onclick="logout()">Cerrar sesión</a></li>
+				  <li id="liSignup"><a href="registro.html">Registro</a></li>
+				  <li id="liSignin"><a href="login.html">Accede</a></li>
+				  <li><a href="#" class="btm-mega-menu">Más &nbsp;<i class="fa fa-caret-down"></i></a></li>
+				</ul>
+			  </nav>
+		<!--======================================== Mega menu ========================================-->
+		<div class="full-reset mega-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Recursos</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-search"></i>&nbsp; Buscar en
+									GOOGLE</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-graduation-cap"></i>&nbsp;
+									Plataforma (MOODLE)</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Enlaces importantes</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-university"></i>&nbsp; MINED</a>
+							</li>
+							<li><a href="#!"><i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a></li>
+							<li><a href="#!"><i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-flask"></i>&nbsp;
+									UNIVERSIDADES</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Archivos</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!"><i class="fa fa-star-o"></i>&nbsp; Promociones INS</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-file-text-o"></i>&nbsp; Const. de
+									conducta</a></li>
+							<li><a href="#!"><i class="fa fa-download"></i>&nbsp; Descargas</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
+		</div>
+	
+		<!--======================================== Boton menu mobil ========================================-->
+		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m"><i
+				class="fa fa-ellipsis-v"></i></a>
+
+	</header>
+	<!--======================================== fotos con funcionalidad ========================================-->
+	<section class="events-ins"  style="background: azure">
+		<div class="container-fluid">
+			<h2 class="text-center" style="font-family:'Romanesco';"><strong>ORGANIZADOR</strong></h2>
+			<div class="divider-general"></div>
+			<div class="row">
+				<!-- Agenda -->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex ">
+									<a href="agenda.html"><img src="assets/img/iconos/agenda.png" class="arreglo" alt="Default"></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="agenda.html" style="color: rgb(51,51,51); text-decoration: none;"><h2>Agenda</h2></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<!--Calendario -->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex">
+									<a href="invitado.html"><img src="assets/img/iconos/invotado.png" class="arreglo" alt="Default"></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="invitado.html" style="color: rgb(51,51,51); text-decoration: none;"><h2> Invitado</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<!-- Mesas-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex">
+									<a href="mesa.html"><img src="assets/img/iconos/mesa.png" class="arreglo" alt="Default"></a>
+									&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									<a href="mesa.html" style="color: rgb(51,51,51); text-decoration: none;"><h2> Mesa</h2></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<!-- Presupuesto -->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex">
+									<a href="presupuesto.html"><img src="assets/img/iconos/presupuesto.png" class="arreglo" alt="Default">
+									
+									<a href="presupuesto.html" style="color: rgb(51,51,51); text-decoration: none;"><h2>&nbsp;&nbsp;&nbsp;Presupuesto</h2></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<!-- Dia Boda -->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex">
+									<a href="diaBoda.html"><img src="assets/img/iconos/diaboda.jpeg" class="arreglo" alt="Default">
+									<a href="diaBoda.html" style="color: rgb(51,51,51); text-decoration: none;"><h2>&nbsp;&nbsp;&nbsp;&nbsp;Día&nbsp;Boda</h2>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<!-- Cuenta Regresiva -->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex">
+									<a href="cuentaregresiva.html"><img src="assets/img/iconos/calendario.png" class="arreglo" alt="Default"></a>
+									<a href="cuentaregresiva.html" style="color: rgb(51,51,51); text-decoration: none;"><h2>&nbsp;&nbsp;Cuenta &nbsp;&nbsp;Regresiva</h2></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<!-- Editar -->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex">
+									<a href="loSentimos.html"><img src="assets/img/iconos/editar.png" class="arreglo" alt="Default">
+									<a href="loSentimos.html" style="color: rgb(51,51,51); text-decoration: none;"><h2>&nbsp;&nbsp;&nbsp;&nbsp;Editar</h2></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+				<!-- Ideas BOda -->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+						<br><br>
+					<div id="escritorio">
+						<div class="row">
+							<div class="col-xs-12 col-sm-6 col-md-3">
+								<div class="item d-flex">
+									<a href="ideas.html"><img src="assets/img/iconos/idea.png" class="arreglo" alt="Default"></a>
+									<a href="ideas.html" style="color: rgb(51,51,51); text-decoration: none;"><h2>&nbsp;&nbsp;&nbsp;&nbsp;Ideas&nbsp;Boda</h2></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</article>
+			</div>
+	</section>
+
+
+	<!--======================================== Pie de pagina ========================================-->
+	<footer class="full-reset footer">
+		<div class="full-reset" style="padding: 15px 0;">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Visitenos en</h4>
+						<p class="text-center">www.informatica.edu.bo/</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles text-center">Contactenos</h4>
+						<p class="text-center">Teléfono: 77277352 <br>69707104<br>
+							Correo Electrónico:
+							marimu9188@gmail.com<br>fernkat5@gmail.com</p>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<h4 class="titles subtitles-footer">Siguenos en</h4>
+						<ul class="list-unstyled links-footer">
+							<li><a href="https://www.facebook.com/" class="open-link-newTab"><i class="fa fa-facebook"></i> &nbsp;
+									Facebook</a></li>
+							<li><a href="https://twitter.com/login?lang=es" class="open-link-newTab"><i class="fa fa-twitter"></i> &nbsp;
+									Twitter</a></li>
+							<li><a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab"><i class="fa fa-google-plus"></i> &nbsp;
+									Google+</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-12">
+						<div class="full-reset footer-copyright"><i class="fa fa-copyright"></i> 2019 BODAS TEC</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script>
+			function showMenus() {
+				document.getElementById("liSignup").style.display = "none";
+				document.getElementById("liSignin").style.display = "none";
+		
+			}
+			function showLogued() {
+				document.getElementById("liOrganizer").style.display = "none";
+				document.getElementById("liLogout").style.display = "none";
+			}
+			</script>
+</body>
+
+</html>

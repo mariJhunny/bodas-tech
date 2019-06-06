@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap" rel="stylesheet" type='text/css'>	
+	<title>Bodas Tec</title>
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link href='http://fonts.googleapis.com/css?family=PT+Sans+Narrow' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" href="css/style.css">
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="js/jquery-1.11.2.min.js"><\/script>')</script>
+	<script src="js/modernizr.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/main.js"></script>
+</head>
+
+<body>
+
+	<script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+	<script>
+		// Initialize Firebase
+		// TODO: Replace with your project's customized code snippet
+		var config = {
+			apiKey: "AIzaSyDTua7F3t3NBJSQcUm_nVAYT2ViT2hFCmE",
+			authDomain: "bdbodas-6abf1.firebaseapp.com",
+			databaseURL: "https://bdbodas-6abf1.firebaseio.com",
+			projectId: "bdbodas-6abf1",
+			storageBucket: "bdbodas-6abf1.appspot.com",
+			messagingSenderId: "357037616157",
+		};
+		firebase.initializeApp(config);
+		var uid;
+		function logout() {
+			firebase.auth().signOut().then(function () {
+				alert("cerro session");
+				window.location="index.html";
+			}, function (error) {
+				// An error happened.
+			});
+		}
+		firebase.auth().onAuthStateChanged(function (user) {
+			if (user) {
+				// User is signed in.
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var uid = user.uid;
+				var providerData = user.providerData;
+				console.log(email);
+				console.log(uid);
+				showMenus();
+			} else {
+				showLogued();
+			}
+		});
+	</script>
+	<!--======================================== Boton ir arriba ========================================-->
+	<i class="btn-up fa fa-arrow-circle-o-up hidden-xs"></i>
+	<!--======================================== Navegación ========================================-->
+	<header class="full-reset header">
+		<!--======================================== Logo(Nombre INS) ========================================-->
+		<div class="full-reset logo">
+			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Bodas|Tec</a></span>
+			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Bodas Tec</a></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+		<!--<span class="hidden-xs hidden-sm" style="font-family:'Romanesco'; color: #4364cf">Bienvenido </span>-->
+	</div>
+		<script>
+	//		var evento = document.getElementById("even");
+	//			var data = '<ul class="list-group" style="width: 290px">';
+	//			data += '<span class="hidden-xs hidden-sm" style="font-family:Great Vibes">Bienvenido '+ uid.nombreEvento +'</span>'
+	//			evento.innerHTML = data;
+	</script>
+		<!--======================================== Links de navegación ========================================-->
+		<nav class="full-reset navigation">
+			<ul class="full-reset list-unstyled">
+				<li><a href="index.html">Inicio</a></li>
+				<li id="liOrganizer"><a href="organizador.html">Organizador</a></li>
+				<li><a href="provedores.html">Proveedores</a></li>
+				<li id="liLogout"><a onclick="logout()">Cerrar sesión</a></li>
+				<li id="liSignup"><a href="registro.html">Registro</a></li>
+				<li id="liSignin"><a href="login.html">Accede</a></li>
+				<li><a href="#" class="btm-mega-menu">Más &nbsp;<i class="fa fa-caret-down"></i></a></li>
+			</ul>
+		</nav>
+		<!--======================================== Mega menu ========================================-->
+		<div class="full-reset mega-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Recursos</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-search"></i>&nbsp; Buscar en
+									GOOGLE</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-graduation-cap"></i>&nbsp;
+									Plataforma
+									(MOODLE)</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Enlaces importantes</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-university"></i>&nbsp; MINED</a>
+							</li>
+							<li><a href="#!"><i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a></li>
+							<li><a href="#!"><i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-flask"></i>&nbsp;
+									UNIVERSIDADES</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Archivos</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!"><i class="fa fa-star-o"></i>&nbsp; Promociones INS</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-file-text-o"></i>&nbsp; Const. de
+									conducta</a>
+							</li>
+							<li><a href="#!"><i class="fa fa-download"></i>&nbsp; Descargas</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
+		</div>
+		<!--======================================== Mega menu "organizador"========================================-->
+		<div class="full-reset mega-menu">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Recursos</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-search"></i>&nbsp; Buscar en
+									GOOGLE</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-graduation-cap"></i>&nbsp;
+									Plataforma
+									(MOODLE)</a></li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Enlaces importantes</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-university"></i>&nbsp; MINED</a>
+							</li>
+							<li><a href="#!"><i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a></li>
+							<li><a href="#!"><i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-flask"></i>&nbsp;
+									UNIVERSIDADES</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-4">
+						<span class="full-reset titles">Archivos</span>
+						<ul class="list-unstyled full-reset">
+							<li><a href="#!"><i class="fa fa-star-o"></i>&nbsp; Promociones INS</a></li>
+							<li><a href="#!" class="open-link-newTab"><i class="fa fa-file-text-o"></i>&nbsp; Const. de
+									conducta</a>
+							</li>
+							<li><a href="#!"><i class="fa fa-download"></i>&nbsp; Descargas</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
+		</div>
+		<!--======================================== Boton menu mobil ========================================-->
+		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m"><i
+				class="fa fa-ellipsis-v"></i></a>
+
+	</header>
+	<!--======================================== Logo & Lema ========================================-->
+	<section class="full-reset font-cover" style="background-image: url(assets/img/imagen3.jpg);">
+		<div class="full-reset" style="height: 100%; background-color: rgba(255,255,255,.6); padding: 60px 0;">
+			<h1 class="text-center titles">Bienvenido</h1>
+			<figure class="Logo-Ins-Index">
+				<img src="assets/img/imagen6.png" alt="Logo" class="img-responsive" onclick="logout()">
+				</figure>
+			<p class="lead text-center">
+				"Si están buscando a una empresa en la cual planifiquen el matrimonio de principio a fin y también les
+				entreguen
+				un servicio integral, Wedding Palnning es la opción. Esta compañía tiene una
+				experiencia realizando grandes eventos, por lo que cuenta con todos los servicios que necesitarán para
+				el
+				matrimonio."
+			</p>
+		</div>
+	</section>
+	<h2 class="text-center"  style="font-family:'Romanesco';">A continuación algunos de los proveedores con los que contamos . . .</h2>
+	<div class="divider-general"></div>
+	<section class="full-reset section-gallery-ins"  style="background: rgb(249, 252, 227)">
+		<!--========================================  ========================================-->
+			<h2 class="text-center"  style="font-family:'Romanesco';"><strong>Decoraciones</strong></h2>
+		<div class="divider-general"></div>
+		
+		<!--======================================== Proveedores ========================================-->
+	<section class="events-ins">
+		<div class="container-fluid">
+			<div class="row">
+				<!--======================================== Decoraciones 1 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/ser4.jpg" alt="default" class="img-responsive img-rounded">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>QUIJOTADAS BOLIVIA</strong></h3>
+				        <p class="text-justify"><small>Ofrecemos servicios de animación de eventos: matrimonios, cumpleaños, 15 años. Personajes, batucada, hora loca, zancos y skyrunners, armamos paquetes especiales. Contáctenos y le aseguramos la diversión en su evento.</small></p>
+				        <p class="text-center"><a href="http://www.matriqui.bo/proveedor.asp?Seleccion=220" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== decoracion 2 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/dec.jpg" alt="default" class="img-responsive img-rounded" width="365">
+				      <div class="caption"
+				      <p></p>
+				        <h3 class="text-center"><strong>FIESTAS MIX</strong></h3>
+				        <p class="text-justify"><small>Y un día en el que todo suma; cada detalle en la decoración de boda es importantísimo para que tu ceremonia ya sea por la iglesia como por lo civil vaya todo bien.</small></p>
+				        <p class="text-center"><a href="https://www.fiestasmix.com/decoracion-bodas-adornos/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== decoracion 3 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/dec1.jpg" alt="IMG" class="img-responsive img-rounded" width="465">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>DECORACION BODA</strong></h3>
+				        <p class="text-justify"><small>Inspírate con nuestras ideas de decoración para hacer de tu matrimonio algo muy especial. Las flores de la ceremonia, los centros de mesa, los detalles de la fiesta... Descubre las últimas tendencias y adáptalas a tu propio estilo.</small></p>
+				        <p class="text-center"><a href="https://www.matrimonio.com.co/articulos/la-decoracion-para-la-boda--t22" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+			</div>
+		</div>
+	</section>
+	<div class="divider-general"></div>
+	<!--========================================  ========================================-->
+			<h2 class="text-center" style="font-family:'Romanesco';"><strong>Vestidos</strong></h2>
+		<div class="divider-general"></div>
+		
+		<!--======================================== Proveedores ========================================-->
+	<section class="events-ins">
+		<div class="container-fluid">
+			<div class="row">
+				<!--======================================== vestidos 1 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/novia.jpg" alt="default" class="img-responsive img-rounded" width="315">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>ROSA CLARA</strong></h3>
+				        <p class="text-justify"><small>La colección de alta costura de trajes de novia presenta diseños repletos de detalles exquisitos en tejidos delicados y fluidos para vestir los sueños de la novia de hoy de romanticismo y elegancia.</small></p>
+				        <p class="text-center"><a href="https://www.rosaclara.es/c/vestidos-de-novia/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 2 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/novia2.jpg" alt="default" class="img-responsive img-rounded" width="265">
+				      <div class="caption"
+				      <p></p>
+				        <h3 class="text-center"><strong>WHITE ONE</strong></h3>
+				        <p class="text-justify"><small>White One es una colección que lleva las tendencias en vestidos de novia en todo el mundo, consiguiendo así que todas las novias, sin importar nacionalidad o religión, sean capaces de encontrar en esta colección su vestido ideal. </small></p>
+				        <p class="text-center"><a href="https://www.whiteonebridal.com/es/vestidos-novia/whiteone/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 3 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/novia3.jpg" alt="IMG" class="img-responsive img-rounded" width="300">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>LUNA NOVIAS</strong></h3>
+				        <p class="text-justify"><small>Vestidos románticos y suaves para las novias de hoy, confeccionados con una amplia variedad de tejidos, cuidando hasta el último detalle; para que las novias luzcan radiantes en uno de los días más mágicos de su vida.</small></p>
+				        <p class="text-center"><a href="https://www.lunanovias.com/language-selector/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+			</div>
+		</div>
+	</section>
+	<div class="divider-general"></div>
+	<!--========================================  ========================================-->
+			<h2 class="text-center" style="font-family:'Romanesco';"><strong>Catering</strong></h2>
+		<div class="divider-general"></div>
+		
+		<!--======================================== Proveedores ========================================-->
+	<section class="events-ins">
+		<div class="container-fluid">
+			<div class="row">
+				<!--======================================== vestidos 1 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/comi1.jpg" alt="default" class="img-responsive img-rounded" width="375">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>ANDINO</strong></h3>
+				        <p class="text-justify"><small>En Catering Andino brindamos servicios de calidad, basados en la atención personalizada y capacitación permanente, estamos comprometidos con la mejora continua de nuestros procesos y así lograr la satisfacción de nuestros clientes.</small></p>
+				        <p class="text-center"><a href="http://www.cateringandino.com/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 2 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/comi2.jpg" alt="default" class="img-responsive img-rounded" width="390">
+				      <div class="caption"
+				      <p></p>
+				        <h3 class="text-center"><strong>COCINARTE</strong></h3>
+				        <p class="text-justify"><small>Contamos con la ventaja y la calidez de ser un servicio artesanal con una estructura profesional, moderna y flexible, dimensionada hacia sus necesidades, poniendo especial énfasis en La Calidad y La Creatividad.
+				        Nuestro chef y propietario es un profesional graduado en la escuela de cocina Francesa Cordon Bleu de Lima – Perú, con experiencia en diferentes instituciones y empresas tanto en Perú como en Bolivia. </small></p>
+				        <p class="text-center"><a href="https://www.cocinarte.com.bo/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 3 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/comi3.jpg" alt="IMG" class="img-responsive img-rounded" width="480">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>CASA JARDIN</strong></h3>
+				        <p class="text-justify"><small>Ofrecemos tres diferentes paquetes para Matrimonios de 50 a 500 personas, que incluyen todos los ítems que requiere la celebración más especial de tu vida. Organizamos matrimonio civil y matrimonio religioso, consulta a nuestra Organizadora de eventos como organizar a la perfección tu boda.</small></p>
+				        <p class="text-center"><a href="https://casajardineventos.com/servicios/matrimonio" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+			</div>
+		</div>
+	</section>
+	<div class="divider-general"></div>
+	<!--========================================  ========================================-->
+			<h2 class="text-center" style="font-family:'Romanesco';"><strong>Tortas y Pasteles</strong></h2>
+		<div class="divider-general"></div>
+		
+		<!--======================================== Proveedores ========================================-->
+	<section class="events-ins">
+		<div class="container-fluid">
+			<div class="row">
+				<!--======================================== vestidos 1 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/past1.jpg" alt="default" class="img-responsive img-rounded" width="375">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>TORTAS DOLLY</strong></h3>
+				        <p class="text-justify"><small>Nuestra misión es deleitar a nuestros clientes con deliciosos productos, elaborados eficientemente con insumos de calidad y por un equipo humano comprometido.</small></p>
+				        <p class="text-center"><a href="https://tortasdolly.com/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 2 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/past2.jpg" alt="default" class="img-responsive img-rounded" width="285">
+				      <div class="caption"
+				      <p></p>
+				        <h3 class="text-center"><strong>DON PASTEL</strong></h3>
+				        <p class="text-justify"><small>Los productos de Don Pastel son libres de conservadores, hechos a mano todos los días a base de ingredientes frescos y en su mayoría regionales. </small></p>
+				        <p class="text-center"><a href="https://www.donpastel.com/galeria" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 3 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/past3.jpg" alt="IMG" class="img-responsive img-rounded" width="400">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>BASI D' ANGELO</strong></h3>
+				        <p class="text-justify"><small>Tu boda es un día inolvidable, y tu pastel de bodas debe estar a la altura. Ya sea una boda pequeña e íntima o un evento más lujoso, podemos elaborar el pastel perfecto para complementar tu estilo y tu celebración. </small></p>
+				        <p class="text-center"><a href="https://www.bacidangelo.com/bodas/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+			</div>
+		</div>
+	</section>
+	<div class="divider-general"></div>
+	<!--========================================  ========================================-->
+			<h2 class="text-center" style="font-family:'Romanesco';"><strong>Video y Fotografia</strong></h2>
+		<div class="divider-general"></div>
+		
+		<!--======================================== Proveedores ========================================-->
+	<section class="events-ins">
+		<div class="container-fluid">
+			<div class="row">
+				<!--======================================== vestidos 1 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/foto1.jpg" alt="default" class="img-responsive img-rounded" width="380">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>LIMA</strong></h3>
+				        <p class="text-justify"><small>Nos preocupamos por la realización audiovisual detallada del dia de la boda contando tu historia amenamente.</small></p>
+				        <p class="text-center"><a href="https://www.fotoyvideodebodas.com/" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 2 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/foto2.jpg" alt="default" class="img-responsive img-rounded" width="490">
+				      <div class="caption"
+				      <p></p>
+				        <h3 class="text-center"><strong>MAXTER PRODUCCIONES</strong></h3>
+				        <p class="text-justify"><small>Contamos con fotografos, camarografos y editores de amplia experiencia y creatividad para garantizarte el mejor recuerdo de tu fiesta.</small></p>
+				        <p class="text-center"><a href="http://www.maxterproducciones.com/index.php?id=29" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+				<!--======================================== vestidos 3 ========================================-->
+				<article class="col-xs-12 col-sm-6 col-md-4">
+					<div class="thumbnail">
+				      <img src="assets/gallery/foto3.jpg" alt="IMG" class="img-responsive img-rounded" width="480">
+				      <div class="caption">
+				        <h3 class="text-center"><strong>MEMORIES HD</strong></h3>
+				        <p class="text-justify"><small>​Regálate un Photobook y así podrás recordar esos bellos momentos de una manera única.</small></p>
+				        <p class="text-center"><a href="http://memoriesh1.wixsite.com/inicio/serviciosadicionaes" class="btn btn-primary" role="button">Ver mas</a></p>
+				      </div>
+				    </div>
+				</article>
+			</div>
+		</div>
+	</section>
+	<div class="divider-general"></div>
+		
+
+	</section>
+			<!--======================================== Pie de pagina ========================================-->
+			<footer class="full-reset footer">
+				<div class="full-reset" style="padding: 15px 0;">
+					<div class="container">
+						<div class="row">
+							<div class="col-xs-12 col-sm-4">
+								<h4 class="titles text-center">Visitenos en</h4>
+								<p class="text-center">www.informatica.edu.bo/</p>
+							</div>
+							<div class="col-xs-12 col-sm-4">
+								<h4 class="titles text-center">Contactenos</h4>
+								<p class="text-center">Teléfono: 77277352 <br>69707104<br>
+									Correo Electrónico:
+									marimu9188@gmail.com<br>fernkat5@gmail.com</p>
+							</div>
+							<div class="col-xs-12 col-sm-4">
+								<h4 class="titles subtitles-footer">Siguenos en</h4>
+								<ul class="list-unstyled links-footer">
+									<li><a href="https://www.facebook.com/" class="open-link-newTab"><i class="fa fa-facebook"></i> &nbsp;
+											Facebook</a></li>
+									<li><a href="https://twitter.com/login?lang=es" class="open-link-newTab"><i class="fa fa-twitter"></i> &nbsp;
+											Twitter</a></li>
+									<li><a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab"><i class="fa fa-google-plus"></i> &nbsp;
+											Google+</a></li>
+								</ul>
+							</div>
+							<div class="col-xs-12">
+								<div class="full-reset footer-copyright"><i class="fa fa-copyright"></i> 2019 BODAS TEC</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</footer>
+			<script>
+				function showMenus() {
+					document.getElementById("liSignup").style.display = "none";
+					document.getElementById("liSignin").style.display = "none";
+
+				}
+				function showLogued() {
+					document.getElementById("liOrganizer").style.display = "none";
+					document.getElementById("liLogout").style.display = "none";
+				}
+			</script>
+</body>
+
+</html>

@@ -70,6 +70,7 @@
 						// doc.data() is never undefined for query doc snapshots
 						docEvento = doc1.id;
 						db.collection("invitado").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
+							var cantidad = 0;
 							querySnapshot2.forEach(function (doc2) {
 								// doc.data() is never undefined for query doc snapshots
 
@@ -79,9 +80,12 @@
 								data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="'+click+'" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
 
 								console.log(doc2.id, " => ", doc2.data());
+								cantidad = cantidad+1;
 							}
 							);
-							data += "</ul>"
+							data += "</ul>";
+							var divCantidad = document.getElementById("cantidad");
+							divCantidad.innerHTML = cantidad;
 							invitado.innerHTML = data;
 						})
 							.catch(function (error) {
@@ -100,6 +104,7 @@
 						// doc.data() is never undefined for query doc snapshots
 						docEvento = doc.id;
 						db.collection("invitado").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
+							var cantidad = 0;
 							querySnapshot2.forEach(function (doc2) {
 								console.log("gunar2");
 								// doc.data() is never undefined for query doc snapshots
@@ -107,9 +112,12 @@
 								var click = "statusGuest('"+doc2.id+"', '" + doc2.data().asiste + "')"
 								data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="'+click+'" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
 								console.log(doc2.id, " => ", doc2.data());
+								cantidad = cantidad+1;
 							});
 							data += "</ul>"
 							console.log(data);
+							var divCantidad = document.getElementById("cantidad");
+							divCantidad.innerHTML = cantidad;
 							invitado.innerHTML = data;
 						})
 							.catch(function (error) {
@@ -139,7 +147,7 @@
 		<!--======================================== Logo(Nombre INS) ========================================-->
 		<div class="full-reset logo">
 			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Invitados</a></span>
-			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">BodasTec - Invitados</a></span>
+			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Invitados</a></span>
 		</div>
 		<!--======================================== Links de navegación ========================================-->
 		<nav class="full-reset navigation">
@@ -217,9 +225,14 @@
 			<div class="row">
 					<article class="col-sm-8" id="b-contador">
 							<div class="page-header" style="margin-bottom:40px;">
-								<h2><i class="fa fa-desktop"></i> &nbsp; Invitados recientes</h2>
+								<h2  style="font-family:'Overlock';"><i class="fa fa-desktop"></i> &nbsp; Invitados recientes</h2>
 							</div>
 							<div id="invi"></div>
+						<p>
+								<div class="divider-general"></div>
+							<h1  class="text-center" style="font-family:'Overlock';"><strong>Invitados en total. . . <span style="font-family:'Overlock';" id="cantidad"><span></strong></span></h1>
+							
+						</p>
 							<script language="javascript">
 								function statusGuest(id, status) {
 									db.collection("invitado").doc(id).set({
@@ -230,6 +243,7 @@
 								}
 							</script>
 						</article>
+
 				<section class="col-xs-4">
 					<article class="full-reset" id="ubicacion-ins">
 						<div class="form-style-5">

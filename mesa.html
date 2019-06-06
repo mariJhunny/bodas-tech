@@ -63,8 +63,9 @@
 					var providerData = user.providerData;
 					console.log(email);
 					showMenus();
-					var invitado = document.getElementById("invi");
-					var data = '<ul class="list-group" style="width: 290px">';
+
+					var invitados = [];
+
 					db.collection("evento").where("uid2", "==", uid).get().then(function (querySnapshot1) {
 						querySnapshot1.forEach(function (doc1) {
 							// doc.data() is never undefined for query doc snapshots
@@ -74,15 +75,18 @@
 									// doc.data() is never undefined for query doc snapshots
 									docEvento = doc2.id;
 									console.log("gunar1");
-									var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
-									var click = "statusGuest('" + doc2.id + "', '" + doc2.data().asiste + "')"
-									data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
+
+									invitados.push({id: doc2.id, body: doc2.data()});
+
 
 									console.log(doc2.id, " => ", doc2.data());
 								}
+								
 								);
-								data += "</ul>"
-								invitado.innerHTML = data;
+								console.log(invitados);
+								ordenar(invitados);
+
+
 							})
 								.catch(function (error) {
 									console.log("Error getting documents: ", error);
@@ -103,14 +107,12 @@
 								querySnapshot2.forEach(function (doc2) {
 									console.log("gunar2");
 									// doc.data() is never undefined for query doc snapshots
-									var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
-									var click = "statusGuest('" + doc2.id + "', '" + doc2.data().asiste + "')"
-									data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
+									invitados.push({id: doc2.id, body: doc2.data()});
 									console.log(doc2.id, " => ", doc2.data());
 								});
-								data += "</ul>"
-								console.log(data);
-								invitado.innerHTML = data;
+								
+								console.log(invitados);
+								ordenar(invitados);
 							})
 								.catch(function (error) {
 									console.log("Error getting documents: ", error);
@@ -129,6 +131,45 @@
 					showLogued();
 				}
 			});
+
+			function ordenar(listaInvitados) {	
+
+				var padres = "";
+				var invitado1 = "", familiar = "", laboral = "";
+
+				listaInvitados.forEach(function (invitado) {
+					var click = "statusGuest('" + invitado.id + "', '" + invitado.body.asiste + "')"
+					var style = invitado.body.asiste == "Si" ? 'primary' : 'danger';
+
+					if(invitado.body.tipo == "Padres de la novia" || invitado.body.tipo == "Padres del novio") {
+						padres += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + invitado.body.asiste + '</div>' + invitado.body.nombreInvitado + ' - ' + invitado.body.tipo + '</li>'
+					}
+					else if (invitado.body.tipo == "Invitado") {
+						invitado1 += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + invitado.body.asiste + '</div>' + invitado.body.nombreInvitado + ' - ' + invitado.body.tipo + '</li>'
+					}
+					else if (invitado.body.tipo == "Familiar") {
+						familiar += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + invitado.body.asiste + '</div>' + invitado.body.nombreInvitado + ' - ' + invitado.body.tipo + '</li>'
+					}
+					else {
+						laboral += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + invitado.body.asiste + '</div>' + invitado.body.nombreInvitado + ' - ' + invitado.body.tipo + '</li>'
+					}
+				})
+				var divInvitado = document.getElementById("invitado");
+				var divPadres = document.getElementById("padres");
+				var divLaboral = document.getElementById("laboral");
+				var divFamiliar = document.getElementById("familiar");
+
+				padres = "<ul>" + padres + "</ul>";
+				invitado1 = "<ul>" + invitado1 + "</ul>";
+				familiar = "<ul>" + familiar + "</ul>";
+				laboral = "<ul>" + laboral + "</ul>";
+
+				divInvitado.innerHTML = invitado1;
+				divPadres.innerHTML = padres;
+				divLaboral.innerHTML = laboral; 
+				divFamiliar.innerHTML = familiar;
+
+			}
 		}
 
 	</script>
@@ -255,11 +296,13 @@
 			<h1 class="text-center titles" style="font-family:'Great Vibes'; color: rgb(37, 37, 37);">
 				<b>- - - - - - - - - - - - - - - -</b>
 			</h1>
-					<h2 class="text-center" style="font-family:'Romanesco';">"La familia, los amigos, los colegas del trabajo... Agrúpados y te será más fácil la organizacion."</h2>
+			<h2 class="text-center" style="font-family:'Romanesco';">"La familia, los amigos, los colegas del trabajo... Agrúpados y te será más fácil la organizacion."</h2>
 		</div>
 	</section>
 	<!--======================================== contenido de la pagina ========================================-->
-	<section class="text-left" style="font-family:'Romanesco'; background: rgb(250, 225, 240,.3); padding: 1px 0;"><h1>&nbsp;&nbsp;&nbsp;Los invitados de tu lista aparecerán en el Organizador de Mesas de manera automatica . . .</h1></section>
+	<section class="text-left" style="font-family:'Romanesco'; background: rgb(250, 225, 240,.3); padding: 1px 0;">
+		<h1>&nbsp;&nbsp;&nbsp;Los invitados de tu lista aparecerán en el Organizador de Mesas de manera automatica . . .</h1>
+	</section>
 	<div class="divider-general"></div>
 	<!--======================================== PADRES DE LOS NOVIOS ========================================-->
 	<section class="full-reset" style="background: rgb(249, 252, 227)">
@@ -270,7 +313,7 @@
 						<h2>
 							<i class="fa fa-coffee"></i> &nbsp; Padres de los Novios</h2>
 					</div>
-					<div id="invi"></div>
+					<div id="padres"></div>
 					<script language="javascript">
 						function statusGuest(id, status) {
 							db.collection("invitado").doc(id).set({
@@ -291,7 +334,7 @@
 						<h2>
 							<i class="fa fa-coffee"></i> &nbsp; Familiar</h2>
 					</div>
-					<div id="invi"></div>
+					<div id="familiar"></div>
 					<script language="javascript">
 						function statusGuest(id, status) {
 							db.collection("invitado").doc(id).set({
@@ -312,7 +355,7 @@
 						<h2>
 							<i class="fa fa-coffee"></i> &nbsp; Colegas de Trabajo</h2>
 					</div>
-					<div id="invi"></div>
+					<div id="laboral"></div>
 					<script language="javascript">
 						function statusGuest(id, status) {
 							db.collection("invitado").doc(id).set({
@@ -333,7 +376,7 @@
 						<h2>
 							<i class="fa fa-coffee"></i> &nbsp; Amigos e Invitados</h2>
 					</div>
-					<div id="invi"></div>
+					<div id="invitado"></div>
 					<script language="javascript">
 						function statusGuest(id, status) {
 							db.collection("invitado").doc(id).set({

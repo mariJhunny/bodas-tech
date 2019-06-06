@@ -4,9 +4,8 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link
-		href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap"
-		rel="stylesheet" type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap"
+	 rel="stylesheet" type='text/css'>
 	<title>Día Boda</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/normalize.css">
@@ -22,53 +21,53 @@
 
 
 	<script>
-			function click1() {
-				alert("gunar");
-				var a = document.getElementById("a").value;
-				var b = document.getElementById("b").value;
-				var c = document.getElementById("c").value;
-				var d = document.getElementById("d").value;
-				var e = document.getElementById("e").value;
-				var f = document.getElementById("f").value;
-				var g = document.getElementById("g").value;
-				var h = document.getElementById("h").value;
-				var i = document.getElementById("i").value;
-				var j = document.getElementById("j").value;
-				var k = document.getElementById("k").value;
-				var l = document.getElementById("l").value;
-				var m = document.getElementById("m").value;
-				var n = document.getElementById("n").value;
-				var o = document.getElementById("o").value;
-				var p = document.getElementById("p").value;
-				var q = document.getElementById("q").value;
-	
-				var obj = {
-					a: a,
-					b: b,
-					c: c,
-					d: d,
-					e: e,
-					f: f,
-					g: g,
-					h: h,
-					i: i,
-					j: j,
-					k: k,
-					l: l,
-					m: m,
-					n: n,
-					o: o,
-					p: p,
-					q: q
-				}
-					console.log(obj);
-				db.collection("diaboda").add(obj);
+		function click1() {
+			alert("gunar");
+			var a = document.getElementById("a").value;
+			var b = document.getElementById("b").value;
+			var c = document.getElementById("c").value;
+			var d = document.getElementById("d").value;
+			var e = document.getElementById("e").value;
+			var f = document.getElementById("f").value;
+			var g = document.getElementById("g").value;
+			var h = document.getElementById("h").value;
+			var i = document.getElementById("i").value;
+			var j = document.getElementById("j").value;
+			var k = document.getElementById("k").value;
+			var l = document.getElementById("l").value;
+			var m = document.getElementById("m").value;
+			var n = document.getElementById("n").value;
+			var o = document.getElementById("o").value;
+			var p = document.getElementById("p").value;
+			var q = document.getElementById("q").value;
+
+			var obj = {
+				a: a,
+				b: b,
+				c: c,
+				d: d,
+				e: e,
+				f: f,
+				g: g,
+				h: h,
+				i: i,
+				j: j,
+				k: k,
+				l: l,
+				m: m,
+				n: n,
+				o: o,
+				p: p,
+				q: q
 			}
-	
-	
-	
-	
-		</script>
+			console.log(obj);
+			db.collection("diaboda").add(obj);
+		}
+
+
+
+
+	</script>
 
 
 	<style type="text/css">
@@ -229,10 +228,10 @@
 	<header class="full-reset header">
 		<!--======================================== Logo(Nombre INS) ========================================-->
 		<div class="full-reset logo">
-			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a
-					href="index.html" style="color: #fff; text-decoration: none;">DiaBoda</a></span>
-			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a
-					href="index.html" style="color: #fff; text-decoration: none;">BodasTec - Dia Boda</a></span>
+			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html"
+				 style="color: #fff; text-decoration: none;">DiaBoda</a></span>
+			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html"
+				 style="color: #fff; text-decoration: none;">BodasTec - Dia Boda</a></span>
 		</div>
 		<!--======================================== Links de navegación ========================================-->
 		<nav class="full-reset navigation">
@@ -288,8 +287,7 @@
 			<i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
 		</div>
 		<!--======================================== Boton menu mobil ========================================-->
-		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m"><i
-				class="fa fa-ellipsis-v"></i></a>
+		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m"><i class="fa fa-ellipsis-v"></i></a>
 	</header>
 	<!--======================================== Logo & Lema ========================================-->
 	<section class="full-reset font-cover" style="background-image: url(assets/img/imagen7.jpg);">
@@ -313,7 +311,7 @@
 	<section class="col-xs-3"></section>
 	<section class="col-xs-6">
 		<article class="full-reset" id="ubicacion-ins">
-			<div class="form-style-5"></div>
+			<div class="form-style-5">
 			<table class="egt">
 				<caption>Esperando el gran día</caption>
 				<thead>
@@ -465,13 +463,31 @@
 							<input id="q" type="text" size="50">
 						</td>
 					</tr>
-					<div onclick="click1()">guardar</div>
-
+					<input type="button" value="Guardar Cambios" onclick="click1()">
 				</tbody>
-
+			</div>
 			</table>
+			<style type="text/css">
+				.form-style-5 input[type="button"]:hover {
+					background: pink;
+				}
 
-			
+				.form-style-5 input[type="button"] {
+					position: relative;
+					display: block;
+					padding: 19px 39px 18px 39px;
+					color: black;
+					margin: 0 auto;
+					background: pink;
+					font-size: 18px;
+					text-align: center;
+					font-style: normal;
+					width: 100%;
+					border: 1px solid pink;
+					border-width: 1px 1px 3px;
+					margin-bottom: 10px;
+				}
+			</style>
 		</article>
 	</section>
 
@@ -493,14 +509,12 @@
 					<div class="col-xs-12 col-sm-4">
 						<h4 class="titles subtitles-footer">Siguenos en</h4>
 						<ul class="list-unstyled links-footer">
-							<li><a href="https://www.facebook.com/" class="open-link-newTab"><i
-										class="fa fa-facebook"></i> &nbsp;
+							<li><a href="https://www.facebook.com/" class="open-link-newTab"><i class="fa fa-facebook"></i> &nbsp;
 									Facebook</a></li>
-							<li><a href="https://twitter.com/login?lang=es" class="open-link-newTab"><i
-										class="fa fa-twitter"></i> &nbsp;
+							<li><a href="https://twitter.com/login?lang=es" class="open-link-newTab"><i class="fa fa-twitter"></i> &nbsp;
 									Twitter</a></li>
-							<li><a href="https://support.google.com/plus/?hl=es#topic=9259565"
-									class="open-link-newTab"><i class="fa fa-google-plus"></i> &nbsp;
+							<li><a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab"><i class="fa fa-google-plus"></i>
+									&nbsp;
 									Google+</a></li>
 						</ul>
 					</div>

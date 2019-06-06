@@ -72,7 +72,7 @@
 						db.collection("invitado").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
 							querySnapshot2.forEach(function (doc2) {
 								// doc.data() is never undefined for query doc snapshots
-								docEvento = doc2.id;
+
 								console.log("gunar1");
 								var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
 								var click = "statusGuest('"+doc2.id+"', '" + doc2.data().asiste + "')"

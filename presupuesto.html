@@ -18,6 +18,58 @@
   <script src="js/modernizr.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/main.js"></script>
+  <script>
+    
+    function signup() {
+      var monto = document.getElementById("monto").value;
+      var id = "doc.id"
+      db.collection("evento").doc(docEvento).set({
+        monto: monto
+      }, { merge: true });
+      update();
+
+    }
+    function crearPresupuesto() {
+      var tipoT = document.getElementById("tipo");
+      var nombreT = document.getElementById("nombreTarea");
+      var montoT = document.getElementById("montoPagado");
+
+      db.collection("presupuesto").add({
+        monto: montoT.value,
+        tipo: tipoT.value,
+        nombre: nombreT.value,
+        idEvento: docEvento
+      })
+      updatePresupuesto();
+    }
+    function updatePresupuesto(){
+      db.collection("presupuesto").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
+							var data = "<ul>";
+              var count = 0;
+							querySnapshot2.forEach(function (doc2) {
+								// doc.data() is never undefined for query doc snapshots
+                count += Number(doc2.data().monto);
+								console.log("gunar1");
+								//var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
+								var click = "statusGuest('"+doc2.id+"', '" + doc2.data().asiste + "')"
+								data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="'+click+'" class="label label-primary">' + doc2.data().monto + '</div>' + doc2.data().nombre + ' - ' + doc2.data().tipo + '</li>'
+                
+								console.log(doc2.id, " => ", doc2.data());
+					
+							}
+
+							);
+              document.getElementById("restaMonto").innerHTML = montoGlobal - count;
+              
+							data += "</ul>";
+              console.log(monto, count);
+              document.getElementById("listaPresupuesto").innerHTML = data;
+
+      })
+    }
+  
+  </script>
+
 </head>
 
 <body>
@@ -36,54 +88,103 @@
       messagingSenderId: "357037616157",
     };
     firebase.initializeApp(config);
+    var uid;
+    var docEvento;
+    var db = firebase.firestore();
     function logout() {
       firebase.auth().signOut().then(function () {
-        alert("cerro sesion");
+        alert("Cerro session");
         window.location = "index.html";
       }, function (error) {
         // An error happened.
       });
     }
-    var db = firebase.firestore();
 
-    firebase.auth().onAuthStateChanged(function (user) {
-      if (user) {
-        // User is signed in.
-        var displayName = user.displayName;
-        var email = user.email;
-        var emailVerified = user.emailVerified;
-        var photoURL = user.photoURL;
-        var isAnonymous = user.isAnonymous;
-        var uid = user.uid;
-        var providerData = user.providerData;
-        console.log(email);
-        showMenus();
-        // ...
-      } else {
-        // User is signed out.
-        showLogued();
-      }
-    });
+    update();
+    var montoGlobal = 0;
+
+    function update() {
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          // User is signed in.
+          var displayName = user.displayName;
+          var email = user.email;
+          var emailVerified = user.emailVerified;
+          var photoURL = user.photoURL;
+          var isAnonymous = user.isAnonymous;
+          uid = user.uid;
+          var providerData = user.providerData;
+          console.log(email);
+          showMenus();
+          var invitado = document.getElementById("invi");
+          var data = '<ul class="list-group" style="width: 290px">';
+          db.collection("evento").where("uid2", "==", uid).get().then(function (querySnapshot1) {
+            querySnapshot1.forEach(function (doc1) {
+              // doc.data() is never undefined for query doc snapshots
+              docEvento = doc1.id;
+              montoGlobal = doc1.data().monto;
+              document.getElementById("dinero").innerHTML = doc1.data().monto == undefined ? " " : doc1.data().monto;
+              updatePresupuesto();
+
+            });
+          })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+          ;
+          db.collection("evento").where("uid1", "==", uid).get().then(function (querySnapshot) {
+            querySnapshot.forEach(function (doc) {
+              // doc.data() is never undefined for query doc snapshots
+              docEvento = doc.id;
+              document.getElementById("").innerHTML = doc.data().monto == undefined ? " " : doc.data().monto;
+              updatePresupuesto();
+            });
+          })
+            .catch(function (error) {
+              console.log("Error getting documents: ", error);
+            });
+          ;
+          console.log(docEvento);
+          // ...
+        } else {
+          showLogued();
+        }
+      });
+    }
+
   </script>
+
   <!--======================================== Boton ir arriba ========================================-->
   <i class="btn-up fa fa-arrow-circle-o-up hidden-xs"></i>
   <!--======================================== Navegación ========================================-->
   <header class="full-reset header">
     <!--======================================== Logo(Nombre INS) ========================================-->
-    
+
     <!--======================================== Links de navegación ========================================-->
     <nav class="full-reset navigatione">
-			<ul class="full-reset list-unstyled">
-				<li style="float: left;"><a href="index.html">Inicio</a></li>
-				<li style="float: left"><a href="provedores.html">Proveedores</a></li>
-				<li id="liOrganizer"><a href="organizador.html">Organizador</a></li>
-			</ul>
-		</nav>
-		<nav class="full-reset navigation">
-			<ul class="full-reset list-unstyled">
-				<li id="liLogout"><a onclick="logout()">Cerrar sesión</a></li>
-				<li id="liSignup"><a href="registro.html">Registro</a></li>
-				<li id="liSignin"><a href="login.html">Accede</a></li>
+      <ul class="full-reset list-unstyled">
+        <li style="float: left;">
+          <a href="index.html">Inicio</a>
+        </li>
+        <li style="float: left">
+          <a href="provedores.html">Proveedores</a>
+        </li>
+        <li id="liOrganizer">
+          <a href="organizador.html">Organizador</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="full-reset navigation">
+      <ul class="full-reset list-unstyled">
+        <li id="liLogout">
+          <a onclick="logout()">Cerrar sesión</a>
+        </li>
+        <li id="liSignup">
+          <a href="registro.html">Registro</a>
+        </li>
+        <li id="liSignin">
+          <a href="login.html">Accede</a>
+        </li>
         <li>
           <a href="#" class="btm-mega-menu">Más &nbsp;
             <i class="fa fa-caret-down"></i>
@@ -170,31 +271,24 @@
   </header>
   <!--======================================== Logo & Lema ========================================-->
   <section class="full-reset font-cover" style="background-image: url(assets/img/kafondo.jpg);">
-		<div class="full-reset" style="height: 100%; background-color: rgba(20, 19, 19, .6); padding: 60px 0;">
-            <h1 class="text-center titles"></h1>
-        </div>
-    </section>
+    <div class="full-reset" style="height: 100%; background-color: rgba(20, 19, 19, .6); padding: 60px 0;">
+      <h1 class="text-center titles"></h1>
+    </div>
+  </section>
   <!--======================================== contenido de la pagina ========================================-->
   <section class="full-reset" style="background-color: #f1d1b5; padding: 20px 0;">
     <div class="container">
       <div class="row">
         <article class="col-sm-8" id="b-contador">
           <div class="page-header" style="margin-bottom:40px;">
-            <h2>
+            <h2 style="font-family:'Overlock';">
               <i class="fa fa-calculator"></i> &nbsp; Monto total con el que cuentan</h2>
           </div>
-          <div id="invi">
-            <li class="list-group-item"><div style="float: right; cursor: pointer" class="label">' + doc2.data().asiste + '</div></li>'
-          </div>
-          <script language="javascript">
-            function statusGuest(id, status) {
-              db.collection("presupuesto").doc(id).set({
-                asiste: status == "Si" ? 'No' : 'Si'
-              }, { merge: true }).then(function (obj) {
-              })
-            }
-          </script>
+          <div id="dinero"></div>
+          <div class="divider-general"></div>
+          <div id="restaMonto"></div>
         </article>
+
         <section class="col-xs-4">
           <article class="full-reset" id="ubicacion-ins">
             <div class="form-style-5">
@@ -212,22 +306,7 @@
 
           </article>
         </section>
-        <script type="text/javascript">
-          function signup() {
-						var monto = document.getElementById("monto").value;
-						var id = "doc.id"
-						db.collection("presupuesto").add({
-							monto: monto
-						})
-							.then(function (docRef) {
-								console.log("Document written with ID: ", docRef.id);
-								alert("Se registro el monto exitosamente!");
-							})
-							.catch(function (error) {
-								console.error("Error adding document: ", error);
-							});
-					}
-        </script>
+
   </section>
   <div class="divider-general"></div>
   <h2 class="text-center" style="font-family:'Overlock';">
@@ -242,6 +321,7 @@
           <div class="page-header" style="margin-bottom:40px;">
             <h2>
               <i class="fa fa-calculator"></i> &nbsp; Servicios y tareas ya pagadas</h2>
+              <div id="listaPresupuesto"></div>
           </div>
           <div id="invi"></div>
           <script language="javascript">
@@ -249,7 +329,7 @@
               db.collection("invitado").doc(id).set({
                 asiste: status == "Si" ? 'No' : 'Si'
               }, { merge: true }).then(function (obj) {
-                
+
               })
             }
           </script>
@@ -274,7 +354,7 @@
                   <input type="text" id="nombreTarea" name="field2" placeholder="Nombre de lo que se pago">
                   <h4>Monto que se pago</h4>
                   <input type="number" id="montoPagado" name="field2" placeholder="Monto total que se pago">
-                  <input type="button" value="Registrar Pago" onclick="signup()">
+                  <input type="button" value="Registrar Pago" onclick="crearPresupuesto()">
                 </fieldset>
               </form>
             </div>
@@ -336,6 +416,7 @@
       document.getElementById("liOrganizer").style.display = "none";
       document.getElementById("liLogout").style.display = "none";
     }
+
   </script>
 </body>
 

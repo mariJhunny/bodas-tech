@@ -4,7 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap" rel="stylesheet" type='text/css'>
+  <link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap"
+    rel="stylesheet" type='text/css'>
   <title>Bodas Tec - Registro</title>
   <link rel="stylesheet" href="css/font-awesome.min.css">
   <link rel="stylesheet" href="css/normalize.css">
@@ -36,13 +37,13 @@
     };
     firebase.initializeApp(config);
     function logout() {
-			firebase.auth().signOut().then(function () {
-				alert("cerro session");
-				window.location="index.html";
-			}, function (error) {
-				// An error happened.
-			});
-		}
+      firebase.auth().signOut().then(function () {
+        alert("cerro session");
+        window.location = "index.html";
+      }, function (error) {
+        // An error happened.
+      });
+    }
     var db = firebase.firestore();
 
     firebase.auth().onAuthStateChanged(function (user) {
@@ -69,24 +70,44 @@
   <!--======================================== Navegación ========================================-->
   <header class="full-reset header">
     <!--======================================== Logo(Nombre INS) ========================================-->
-    
+
     <!--======================================== Links de navegación ========================================-->
     <nav class="full-reset navigatione">
-			<ul class="full-reset list-unstyled">
-				<li style="float: left;"><a href="index.html">Inicio</a></li>
-				<li style="float: left"><a href="provedores.html">Proveedores</a></li>
-				<li id="liOrganizer"><a href="organizador.html">Organizador</a></li>
-			</ul>
-		</nav>
-		<nav class="full-reset navigation">
-			<ul class="full-reset list-unstyled">
-				<li id="liLogout"><a onclick="logout()">Cerrar sesión</a></li>
-				<li id="liSignup"><a href="registro.html">Registro</a></li>
-				<li id="liSignin"><a href="login.html">Accede</a></li>
-        <li><a href="#" class="btm-mega-menu">Más &nbsp;<i class="fa fa-caret-down"></i></a></li>
+      <ul class="full-reset list-unstyled">
+        <li style="float: left;">
+          <a href="index.html">Inicio</a>
+        </li>
+        <li style="float: left">
+          <a href="provedores.html">Proveedores</a>
+        </li>
+        <li id="liOrganizer">
+          <a href="organizador.html">Organizador</a>
+        </li>
+      </ul>
+    </nav>
+    <nav class="full-reset navigation">
+      <ul class="full-reset list-unstyled">
+        <li id="liLogout">
+          <a onclick="logout()">Cerrar sesión</a>
+        </li>
+        <li id="liSignup">
+          <a href="registro.html">Registro</a>
+        </li>
+        <li id="liSignin">
+          <a href="login.html">Accede</a>
+        </li>
+        <li>
+          <a href="#" class="btm-mega-menu">Más &nbsp;
+            <i class="fa fa-caret-down"></i>
+          </a>
+        </li>
         <div class="full-reset logo">
-          <span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Registro</a></span>
-          <span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Bodas Tec - Registro</a></span>
+          <span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO">
+            <a href="index.html" style="color: #fff; text-decoration: none;">Registro</a>
+          </span>
+          <span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO">
+            <a href="index.html" style="color: #fff; text-decoration: none;">Bodas Tec - Registro</a>
+          </span>
         </div>
       </ul>
     </nav>
@@ -97,28 +118,57 @@
           <div class="col-xs-12 col-sm-4">
             <span class="full-reset titles">Recursos educativos</span>
             <ul class="list-unstyled full-reset">
-              <li><a href="#!" class="open-link-newTab"><i class="fa fa-search"></i>&nbsp; Buscar en GOOGLE</a></li>
-              <li><a href="#!" class="open-link-newTab"><i class="fa fa-graduation-cap"></i>&nbsp; Plataforma
-                  (MOODLE)</a></li>
+              <li>
+                <a href="#!" class="open-link-newTab">
+                  <i class="fa fa-search"></i>&nbsp; Buscar en GOOGLE</a>
+              </li>
+              <li>
+                <a href="#!" class="open-link-newTab">
+                  <i class="fa fa-graduation-cap"></i>&nbsp; Plataforma (MOODLE)
+                </a>
+              </li>
             </ul>
           </div>
           <div class="col-xs-12 col-sm-4">
             <span class="full-reset titles">Enlaces importantes</span>
             <ul class="list-unstyled full-reset">
-              <li><a href="#!" class="open-link-newTab"><i class="fa fa-university"></i>&nbsp; MINED</a></li>
-              <li><a href="#!"><i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a></li>
-              <li><a href="#!"><i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a></li>
-              <li><a href="#!" class="open-link-newTab"><i class="fa fa-flask"></i>&nbsp; UNIVERSIDADES</a></li>
-              <li><a href="#!" class="open-link-newTab"><i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a></li>
+              <li>
+                <a href="#!" class="open-link-newTab">
+                  <i class="fa fa-university"></i>&nbsp; MINED</a>
+              </li>
+              <li>
+                <a href="#!">
+                  <i class="fa fa-paw"></i>&nbsp; ARA-MACAO</a>
+              </li>
+              <li>
+                <a href="#!">
+                  <i class="fa fa-globe"></i>&nbsp; JOVENES A.T.T</a>
+              </li>
+              <li>
+                <a href="#!" class="open-link-newTab">
+                  <i class="fa fa-flask"></i>&nbsp; UNIVERSIDADES</a>
+              </li>
+              <li>
+                <a href="#!" class="open-link-newTab">
+                  <i class="fa fa-gavel"></i>&nbsp; GOBIERNO</a>
+              </li>
             </ul>
           </div>
           <div class="col-xs-12 col-sm-4">
             <span class="full-reset titles">Archivos</span>
             <ul class="list-unstyled full-reset">
-              <li><a href="#!"><i class="fa fa-star-o"></i>&nbsp; Promociones INS</a></li>
-              <li><a href="#!" class="open-link-newTab"><i class="fa fa-file-text-o"></i>&nbsp; Const. de conducta</a>
+              <li>
+                <a href="#!">
+                  <i class="fa fa-star-o"></i>&nbsp; Promociones INS</a>
               </li>
-              <li><a href="#!"><i class="fa fa-download"></i>&nbsp; Descargas</a></li>
+              <li>
+                <a href="#!" class="open-link-newTab">
+                  <i class="fa fa-file-text-o"></i>&nbsp; Const. de conducta</a>
+              </li>
+              <li>
+                <a href="#!">
+                  <i class="fa fa-download"></i>&nbsp; Descargas</a>
+              </li>
             </ul>
           </div>
         </div>
@@ -126,130 +176,146 @@
       <i class="fa fa-times-circle btm-mega-menu close-mega-menu fa-2x"></i>
     </div>
     <!--======================================== Boton menu mobil ========================================-->
-    <a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m"><i
-        class="fa fa-ellipsis-v"></i></a>
+    <a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m">
+      <i class="fa fa-ellipsis-v"></i>
+    </a>
   </header>
   <!--======================================== Contenido de la pagina ========================================-->
   <section class="full-reset font-cover" style="background-image: url(assets/img/kaindex.jpg);">
-		<div class="full-reset" style="height: 100%; background-color: rgba(219, 111, 174, .3)">
-  <!--======================================== Formulario de registro ========================================-->
-    <div class="container">
-      <div class="row">
-        <section class="col-xs-12 col-sm-8 col-md-12 info-section-ins">
-          <article class="full-reset center" id="ubicacion-ins">
-            <div class="form-style-5">
-              <form method="post">
-                <fieldset>
-                  <legend><span class="number">*</span> Ingrese sus datos </legend>
-                  <input type="text" id="nombreEvento" name="field1" placeholder="Elige el nombre de tu evento(Boda de Luz y Adrián) *">
-                  <h5>Ingresa la fecha de tu boda!</h5>
-                  <input type="date" id="fecha" name="field2" placeholder="Correo de la novia *">
-                  <input type="text" id="correo1" name="field1" placeholder="Correo de la novia *">
-                  <input type="text" id="correo2" name="field2" placeholder="Correo del novio *">
-                  <br>
-                  <h5>El administrador sera la novia?
-                  <input type="checkbox" name="" id="admin"></h5> 
-                  <br>
-                  <input type="password" id="pass" name="field2" placeholder="Contraseña *">
-                  <br>
-                  <br>
-                  <br>
-                  <input type="button" value="Registrar" onclick="signup()">
-                </fieldset>
-              </form>
-            </div>
-          </article>
-        </section>
-        <script type="text/javascript">
-          function signup() {
-            console.log("entro");
-            var nombreEvento = document.getElementById("nombreEvento").value;
-            var fecha = document.getElementById("fecha").value;
-            var correo1 = document.getElementById("correo1").value;
-            var correo2 = document.getElementById("correo2").value;
-            var admin = document.getElementById("admin").checked;
-            var pass = document.getElementById("pass").value;
-            firebase.auth().createUserWithEmailAndPassword(correo1, pass).catch(function (error) {
-              // Handle Errors here.
-              var errorCode = error.code;
-              var errorMessage = error.message;
-              // ...
-            }).then(function (res1) {
-
-              console.log(res1.uid, "holaaaa");
-              firebase.auth().createUserWithEmailAndPassword(correo2, pass).catch(function (error) {
-                alert("No se pudo crear sesion");
+    <div class="full-reset" style="height: 100%; background-color: rgba(219, 111, 174, .3)">
+      <!--======================================== Formulario de registro ========================================-->
+      <div class="container">
+        <div class="row">
+          <section class="col-xs-12 col-sm-8 col-md-12 info-section-ins">
+            <article class="full-reset center" id="ubicacion-ins">
+              <div class="form-style-5">
+                <form>
+                  <fieldset>
+                    <legend>
+                      <span class="number">*</span> Ingrese sus datos </legend>
+                    <input type="text" id="nombreEvento" name="field1" placeholder="Elige el nombre de tu evento(Boda de Luz y Adrián) *">
+                    <h5>Ingresa la fecha de tu boda!</h5>
+                    <input type="date" id="fecha" name="field2" placeholder="Correo de la novia *">
+                    <input type="text" id="correo1" name="field1" placeholder="Correo de la novia *">
+                    <input type="text" id="correo2" name="field2" placeholder="Correo del novio *">
+                    <br>
+                    <h5>El administrador sera la novia?
+                      <input type="checkbox" name="" id="admin">
+                    </h5>
+                    <br>
+                    <input type="password" id="pass" name="field2" placeholder="Contraseña *">
+                    <br>
+                    <br>
+                    <br>
+                    <input type="button" value="Registrar" onclick="signup()">
+                  </fieldset>
+                </form>
+              </div>
+            </article>
+          </section>
+          <script type="text/javascript">
+            function signup() {
+              console.log("entro");
+              var nombreEvento = document.getElementById("nombreEvento").value;
+              var fecha = document.getElementById("fecha").value;
+              var correo1 = document.getElementById("correo1").value;
+              var correo2 = document.getElementById("correo2").value;
+              var admin = document.getElementById("admin").checked;
+              var pass = document.getElementById("pass").value;
+              firebase.auth().createUserWithEmailAndPassword(correo1, pass).catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
-              }).then(function (res2) {
-                db.collection("evento").add({
-                  nombreEvento: nombreEvento,
-                  fecha: fecha,
-                  correo1: correo1,
-                  correo2: correo2,
-                  uid1: res1.uid,
-                  uid2: res2.uid,
-                  admin: admin ? "novia" : "novio"
+              }).then(function (res1) {
+
+                //console.log(res1.uid, "holaaaa");
+                firebase.auth().createUserWithEmailAndPassword(correo2, pass).catch(function (error) {
+                  alert("No se pudo crear sesion");
+                  // Handle Errors here.
+                  var errorCode = error.code;
+                  var errorMessage = error.message;
+                  // ...
+                }).then(function (res2) {
+                  console.log("esta entrando a crear");
+                  db.collection("evento").add({
+                    nombreEvento: nombreEvento,
+                    fecha: fecha,
+                    correo1: correo1,
+                    correo2: correo2,
+                    uid1: res1.uid,
+                    uid2: res2.uid,
+                    admin: admin ? "novia" : "novio"
+                  }).then(function (docRef) {
+                    alert("Se registro su evento");
+                    window.location.href = "./organizador.html";
+                    console.log("Document written with ID: ", docRef.id);
+                  })
+                    .catch(function (error) {
+                      console.error("Error adding document: ", error);
+                    });
+
+
                 });
-                alert("Se registro su evento");
-                //window.location.href = "./organizador.html";
-                then(function (docRef) {
-                  console.log("Document written with ID: ", docRef.id);
-                })
-                  .catch(function (error) {
-                    console.error("Error adding document: ", error);
-                  });
               });
-            });
-          }
-        </script>
-  <!--======================================== Pie de pagina ========================================-->
-  <footer class="full-reset footer">
-    <div class="full-reset" style="padding: 15px 0;">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4">
-            <h4 class="titles text-center">Visitenos en</h4>
-            <p class="text-center">www.informatica.edu.bo/</p>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <h4 class="titles text-center">Contactenos</h4>
-            <p class="text-center">Teléfono: 77277352 <br>69707104<br>
-              Correo Electrónico:
-              marimu9188@gmail.com<br>fernkat5@gmail.com</p>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <h4 class="titles subtitles-footer">Siguenos en</h4>
-            <ul class="list-unstyled links-footer">
-              <li><a href="https://www.facebook.com/" class="open-link-newTab"><i class="fa fa-facebook"></i> &nbsp;
-                  Facebook</a></li>
-              <li><a href="https://twitter.com/login?lang=es" class="open-link-newTab"><i class="fa fa-twitter"></i> &nbsp;
-                  Twitter</a></li>
-              <li><a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab"><i class="fa fa-google-plus"></i> &nbsp;
-                  Google+</a></li>
-            </ul>
-          </div>
-          <div class="col-xs-12">
-            <div class="full-reset footer-copyright"><i class="fa fa-copyright"></i> 2019 BODAS TEC</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
-  <!--======================================== API de GOOGLE Maps ========================================-->
-  <script>
-			function showMenus() {
-				document.getElementById("liSignup").style.display = "none";
-				document.getElementById("liSignin").style.display = "none";
-		
-			}
-			function showLogued() {
-				document.getElementById("liOrganizer").style.display = "none";
-				document.getElementById("liLogout").style.display = "none";
-			}
-			</script>
+            }
+          </script>
+          <!--======================================== Pie de pagina ========================================-->
+          <footer class="full-reset footer">
+            <div class="full-reset" style="padding: 15px 0;">
+              <div class="container">
+                <div class="row">
+                  <div class="col-xs-12 col-sm-4">
+                    <h4 class="titles text-center">Visitenos en</h4>
+                    <p class="text-center">www.informatica.edu.bo/</p>
+                  </div>
+                  <div class="col-xs-12 col-sm-4">
+                    <h4 class="titles text-center">Contactenos</h4>
+                    <p class="text-center">Teléfono: 77277352
+                      <br>69707104
+                      <br> Correo Electrónico: marimu9188@gmail.com
+                      <br>fernkat5@gmail.com</p>
+                  </div>
+                  <div class="col-xs-12 col-sm-4">
+                    <h4 class="titles subtitles-footer">Siguenos en</h4>
+                    <ul class="list-unstyled links-footer">
+                      <li>
+                        <a href="https://www.facebook.com/" class="open-link-newTab">
+                          <i class="fa fa-facebook"></i> &nbsp; Facebook
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://twitter.com/login?lang=es" class="open-link-newTab">
+                          <i class="fa fa-twitter"></i> &nbsp; Twitter
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab">
+                          <i class="fa fa-google-plus"></i> &nbsp; Google+
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-xs-12">
+                    <div class="full-reset footer-copyright">
+                      <i class="fa fa-copyright"></i> 2019 BODAS TEC</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+          <!--======================================== API de GOOGLE Maps ========================================-->
+          <script>
+            function showMenus() {
+              document.getElementById("liSignup").style.display = "none";
+              document.getElementById("liSignin").style.display = "none";
+
+            }
+            function showLogued() {
+              document.getElementById("liOrganizer").style.display = "none";
+              document.getElementById("liLogout").style.display = "none";
+            }
+          </script>
 </body>
 
 </html>

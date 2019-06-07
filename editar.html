@@ -152,26 +152,8 @@
 					db.collection("evento").where("uid2", "==", uid).get().then(function (querySnapshot1) {
 						querySnapshot1.forEach(function (doc1) {
 							// doc.data() is never undefined for query doc snapshots
-							docEvento = doc1.id;
-							db.collection("invitado").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
-								querySnapshot2.forEach(function (doc2) {
-									// doc.data() is never undefined for query doc snapshots
-									docEvento = doc2.id;
-									console.log("gunar1");
-									var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
-									var click = "statusGuest('" + doc2.id + "', '" + doc2.data().asiste + "')"
-									data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
-
-									console.log(doc2.id, " => ", doc2.data());
-								}
-								);
-								data += "</ul>"
-								invitado.innerHTML = data;
-							})
-								.catch(function (error) {
-									console.log("Error getting documents: ", error);
-								});
-							;
+							docEvento = {id: doc1.id, body: doc1.data()};
+							loadData(docEvento);
 							console.log(doc.id, " => ", doc.data());
 						});
 					})
@@ -182,24 +164,8 @@
 					db.collection("evento").where("uid1", "==", uid).get().then(function (querySnapshot) {
 						querySnapshot.forEach(function (doc) {
 							// doc.data() is never undefined for query doc snapshots
-							docEvento = doc.id;
-							db.collection("invitado").where("idEvento", "==", docEvento).get().then(function (querySnapshot2) {
-								querySnapshot2.forEach(function (doc2) {
-									console.log("gunar2");
-									// doc.data() is never undefined for query doc snapshots
-									var style = doc2.data().asiste == "Si" ? 'primary' : 'danger';
-									var click = "statusGuest('" + doc2.id + "', '" + doc2.data().asiste + "')"
-									data += ' <li class="list-group-item"><div style="float: right; cursor: pointer" onclick="' + click + '" class="label label-' + style + '">' + doc2.data().asiste + '</div>' + doc2.data().nombreInvitado + ' - ' + doc2.data().tipo + '</li>'
-									console.log(doc2.id, " => ", doc2.data());
-								});
-								data += "</ul>"
-								console.log(data);
-								invitado.innerHTML = data;
-							})
-								.catch(function (error) {
-									console.log("Error getting documents: ", error);
-								});
-							;
+							docEvento = {id: doc.id, body: doc.data()};
+							loadData(docEvento);
 							console.log(doc.id, " => ", doc.data());
 						});
 					})
@@ -213,6 +179,40 @@
 					showLogued();
 				}
 			});
+		}
+
+		function loadData(evento) {
+			var nomEvento = document.getElementById("nombreEvento");
+			var fechaEdit =  document.getElementById("fecha");
+			var correoNovia = document.getElementById("correo1");
+			var correoNovio = document.getElementById("correo2");
+			var tipoAdministrador = document.getElementById("admin");
+			var contraseña = document.getElementById("pass");
+			console.log(evento);
+			nomEvento.value=evento.body.nombreEvento;
+			fechaEdit.value=evento.body.fecha;
+			correoNovia.value = evento.body.correo1;
+			correoNovio.value = evento.body.correo2;
+			tipoAdministrador.checked = evento.body.admin == "novia" ? true : false;
+		}
+		function updateData(){
+			var nomEvento = document.getElementById("nombreEvento");
+			var fechaEdit =  document.getElementById("fecha");
+			var correoNovia = document.getElementById("correo1");
+			var correoNovio = document.getElementById("correo2");
+			var tipoAdministrador = document.getElementById("admin");
+			var contraseña = document.getElementById("pass");
+	
+			var objEvento = {
+				admin: tipoAdministrador.checked ? "novia" : "novio",
+				correo1: correoNovia.value,
+				correo2: correoNovio.value,
+				fecha: fechaEdit.value,
+				nombreEvento: nomEvento.value
+			}
+
+			db.collection("evento").doc(docEvento.id).set(objEvento, {merge: true})
+
 		}
 
 	</script>
@@ -302,7 +302,7 @@
                         <legend> Edite sus datos </legend>
                         <input type="text" id="nombreEvento" name="field1" placeholder="tiene q aparecer el nombre">
                         <h5>Ingresa la fecha de tu boda!</h5>
-                        <input type="date" id="fecha" name="field2" placeholder="Correo de la novia *">
+                        <input type="date" id="fecha" name="field2">
                         <input type="text" id="correo1" name="field1" placeholder="Correo de la novia *">
                         <input type="text" id="correo2" name="field2" placeholder="Correo del novio *">
                         <br>
@@ -313,7 +313,7 @@
                         <br>
                         <br>
                         <br>
-                        <input type="button" value="Guardar Cambios" onclick="signup()">
+                        <input type="button" value="Guardar Cambios" onclick="updateData()">
                       </fieldset>
                     </form>
                   </div>

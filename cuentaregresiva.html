@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <link rel="shortcut icon" href="assets/gallery/icon.png" />
 <html lang="es">
+
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap" rel="stylesheet" type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Righteous|Overlock|Courgette|Sacramento|Romanesco|Great+Vibes&display=swap"
+	 rel="stylesheet" type='text/css'>
 	<title>BodasTec - Cuenta Regresiva</title>
 	<link rel="stylesheet" href="css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/normalize.css">
@@ -18,72 +20,80 @@
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/main.js"></script>
 </head>
-<body>
-		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
-		<script>
-		  // Initialize Firebase
-		  // TODO: Replace with your project's customized code snippet
-		  var config = {
+
+<body style="background-color: pink">
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase-firestore.js"></script>
+	<script>
+		// Initialize Firebase
+		// TODO: Replace with your project's customized code snippet
+		var config = {
 			apiKey: "AIzaSyDTua7F3t3NBJSQcUm_nVAYT2ViT2hFCmE",
 			authDomain: "bdbodas-6abf1.firebaseapp.com",
 			databaseURL: "https://bdbodas-6abf1.firebaseio.com",
 			projectId: "bdbodas-6abf1",
 			storageBucket: "bdbodas-6abf1.appspot.com",
 			messagingSenderId: "357037616157",
-		  };
-		  firebase.initializeApp(config);
-	  
-		  var db = firebase.firestore();
-		  function logout() {
+		};
+		firebase.initializeApp(config);
+
+		var db = firebase.firestore();
+		function logout() {
 			firebase.auth().signOut().then(function () {
 				alert("cerro session");
-				window.location="index.html";
+				window.location = "index.html";
 			}, function (error) {
 				// An error happened.
 			});
 		}
-	  
-		  firebase.auth().onAuthStateChanged(function (user) {
+
+		firebase.auth().onAuthStateChanged(function (user) {
 			if (user) {
-			  // User is signed in.
-			  var displayName = user.displayName;
-			  var email = user.email;
-			  var emailVerified = user.emailVerified;
-			  var photoURL = user.photoURL;
-			  var isAnonymous = user.isAnonymous;
-			  var uid = user.uid;
-			  var providerData = user.providerData;
-			  console.log(email);
-			  showMenus();
-			  // ...
+				// User is signed in.
+				var displayName = user.displayName;
+				var email = user.email;
+				var emailVerified = user.emailVerified;
+				var photoURL = user.photoURL;
+				var isAnonymous = user.isAnonymous;
+				var uid = user.uid;
+				var providerData = user.providerData;
+				console.log(email);
+				showMenus();
+				// ...
 			} else {
-			  // User is signed out.
-			  showLogued();
+				// User is signed out.
+				showLogued();
 			}
-		  });
-		</script>
+		});
+	</script>
 	<!--======================================== Boton ir arriba ========================================-->
 	<i class="btn-up fa fa-arrow-circle-o-up hidden-xs"></i>
 	<!--======================================== Navegación ========================================-->
 	<header class="full-reset header">
 		<!--======================================== Logo(Nombre INS) ========================================-->
-		<div class="full-reset logo">
-			<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">CuentaRegresiva</a></span>
-			<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html" style="color: #fff; text-decoration: none;">Cuenta Regresiva</a></span>
-		</div>
+	
 		<!--======================================== Links de navegación ========================================-->
+		<nav class="full-reset navigatione">
+			<ul class="full-reset list-unstyled">
+				<li style="float: left;"><a href="index.html">Inicio</a></li>
+				<li style="float: left"><a href="provedores.html">Proveedores</a></li>
+				<li id="liOrganizer"><a href="organizador.html">Organizador</a></li>
+			</ul>
+		</nav>
 		<nav class="full-reset navigation">
-				<ul class="full-reset list-unstyled">
-				  <li><a href="index.html">Inicio</a></li>
-				  <li id="liOrganizer"><a href="organizador.html">Organizador</a></li>
-				  <li><a href="provedores.html">Proveedores</a></li>
-				  <li id="liLogout"><a onclick="logout()">Cerrar sesión</a></li>
-				  <li id="liSignup"><a href="registro.html">Registro</a></li>
-				  <li id="liSignin"><a href="login.html">Accede</a></li>
-				  <li><a href="#" class="btm-mega-menu">Más &nbsp;<i class="fa fa-caret-down"></i></a></li>
-				</ul>
-			  </nav>
+			<ul class="full-reset list-unstyled">
+				<li id="liLogout"><a onclick="logout()">Cerrar sesión</a></li>
+				<li id="liSignup"><a href="registro.html">Registro</a></li>
+				<li id="liSignin"><a href="login.html">Accede</a></li>
+				<li><a href="#" class="btm-mega-menu">Más &nbsp;<i class="fa fa-caret-down"></i></a></li>
+				<div class="full-reset logo">
+					<span class="hidden-lg hidden-md" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html"
+						 style="color: #fff; text-decoration: none;">CuentaRegresiva</a></span>
+					<span class="hidden-xs hidden-sm" style="font-family:'Great Vibes';" acronim title="INICIO"><a href="index.html"
+						 style="color: #fff; text-decoration: none;">Cuenta Regresiva</a></span>
+				</div>
+			</ul>
+		</nav>
 		<!--======================================== Mega menu ========================================-->
 		<div class="full-reset mega-menu">
 			<div class="container">
@@ -121,20 +131,19 @@
 		<a href="#" class=" hidden-sm hidden-md hidden-lg pull-right button-menu-mobile show-close-menu-m"><i class="fa fa-ellipsis-v"></i></a>
 	</header>
 	<!--======================================== Logo & Lema ========================================-->
-	<section class="full-reset font-cover" style="background-image: url(assets/img/fond.jpg);">
-		<div class="full-reset" style="height: 100%; background-color: rgba(255,255,255,.3); padding: 60px 0;">
-			<h1 class="text-center titles" style="font-family:'Great Vibes'; color: black;"><b>- - - - - - - - - - - - - -</b></h1>
-			<h1 class="text-center titles" style="font-family:'Niconne'; color: black;">Cuenta Regresiva</h1>
-			<h1 class="text-center titles" style="font-family:'Great Vibes'; color: black;"><b>- - - - - - - - - - - - - -</b></h1>
+	<section class="full-reset font-cover" style="background-image: url(assets/img/kafondo.jpg);">
+		<div class="full-reset" style="height: 100%; background-color: rgba(20, 19, 19, .6); padding: 60px 0;">
+			<h1 class="text-center titles"></h1>
 		</div>
-		<!--======================================== reloj ========================================-->
-				
+	</section>
+	<!--======================================== reloj ========================================-->
+	<section style="background-image: url(assets/img/kaideasfondo.jpg);">
 		<h3 style="border-radius: 10px; color: #0e0220; padding: 10px; font-family: 'Overlock';"><b>Tan solo falta: </b></h3>
 		<h2 id="clock" style="border-radius: 60px; background-color: rgba(255, 134, 180, 4); color: #d56073; padding: 10px; border: 3px pink outset;  font-family: Latin Modern Roman 10;
-font-style: italic;"></h2>
-	<script src="js/countdown.js"></script>
-</section>
-<div class="divider-general"></div>		
+font-style: italic; align-content: center"></h2>
+		<script src="js/countdown.js"></script>
+	</section>
+	<div class="divider-general"></div>
 	<!--======================================== Pie de pagina ========================================-->
 	<footer class="full-reset footer">
 		<div class="full-reset" style="padding: 15px 0;">
@@ -157,7 +166,8 @@ font-style: italic;"></h2>
 									Facebook</a></li>
 							<li><a href="https://twitter.com/login?lang=es" class="open-link-newTab"><i class="fa fa-twitter"></i> &nbsp;
 									Twitter</a></li>
-							<li><a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab"><i class="fa fa-google-plus"></i> &nbsp;
+							<li><a href="https://support.google.com/plus/?hl=es#topic=9259565" class="open-link-newTab"><i class="fa fa-google-plus"></i>
+									&nbsp;
 									Google+</a></li>
 						</ul>
 					</div>
@@ -169,15 +179,16 @@ font-style: italic;"></h2>
 		</div>
 	</footer>
 	<script>
-			function showMenus() {
-				document.getElementById("liSignup").style.display = "none";
-				document.getElementById("liSignin").style.display = "none";
-		
-			}
-			function showLogued() {
-				document.getElementById("liOrganizer").style.display = "none";
-				document.getElementById("liLogout").style.display = "none";
-			}
-			</script>
+		function showMenus() {
+			document.getElementById("liSignup").style.display = "none";
+			document.getElementById("liSignin").style.display = "none";
+
+		}
+		function showLogued() {
+			document.getElementById("liOrganizer").style.display = "none";
+			document.getElementById("liLogout").style.display = "none";
+		}
+	</script>
 </body>
+
 </html>

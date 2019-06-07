@@ -212,8 +212,10 @@
 			}
 
 			db.collection("evento").doc(docEvento.id).set(objEvento, {merge: true})
+			alert("Datos modificados!!");
 
 		}
+		
 
 	</script>
 	<!--======================================== Boton ir arriba ========================================-->
@@ -308,7 +310,8 @@
                         <br>
                         <h5>El administrador sera la novia?
                         <input type="checkbox" name="" id="admin"></h5> 
-                        <br>
+						<br>
+						<h5>Ingrese su contraseña para confirmar</h5>
                         <input type="password" id="pass" name="field2" placeholder="Contraseña *">
                         <br>
                         <br>
